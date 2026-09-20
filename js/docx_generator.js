@@ -848,17 +848,18 @@ window.DocxGenerator = (function() {
                         else if (col.key === 'session') col.width = 850;
                         else if (col.key === 'period') col.width = 600;
                         else if (col.key === 'className') col.width = 1000;
-                        else if (col.key === 'subject') col.width = 2000;
-                        else if (col.key === 'ppct') col.width = 1000;
-                        else if (col.key === 'lesson') col.width = 4100;
-                        else if (col.key === 'integ') col.width = 4320;
+                        else if (col.key === 'subject') col.width = 1500;
+                        else if (col.key === 'ppct') col.width = 950;
+                        else if (col.key === 'lesson') col.width = 4150;
+                        else if (col.key === 'integ') col.width = 4220;
                     });
                 } else {
                     const wBase = {
                         day: 1300,
                         session: 850,
                         period: 600,
-                        subject: 2200,
+                        className: 1000,
+                        subject: 1500,
                         ppct: 950,
                         sign: 1000,
                         note: 1400
@@ -867,7 +868,7 @@ window.DocxGenerator = (function() {
                     if (customCount >= 3) wCustomEach = 1000;
                     else if (customCount === 2) wCustomEach = 1200;
 
-                    let used = wBase.day + wBase.session + wBase.period + wBase.subject + wBase.ppct;
+                    let used = wBase.day + wBase.session + wBase.period + wBase.className + wBase.subject + wBase.ppct;
                     if (showSign) used += wBase.sign;
                     if (showNote) used += wBase.note;
                     used += (customCount * wCustomEach);
@@ -879,7 +880,7 @@ window.DocxGenerator = (function() {
                         if (col.key === 'day') col.width = wBase.day;
                         else if (col.key === 'session') col.width = wBase.session;
                         else if (col.key === 'period') col.width = wBase.period;
-                        else if (col.key === 'className') col.width = 1000;
+                        else if (col.key === 'className') col.width = wBase.className;
                         else if (col.key === 'subject') col.width = wBase.subject;
                         else if (col.key === 'ppct') col.width = wBase.ppct;
                         else if (col.key === 'lesson') col.width = wLesson;
@@ -891,28 +892,30 @@ window.DocxGenerator = (function() {
                 }
             } else {
                 const wBase = {
-                    day: 1450,
-                    session: 950,
+                    day: 1400,
+                    session: 900,
                     period: 650,
-                    subject: 2600,
-                    ppct: 1100,
-                    sign: 1200,
-                    note: 1800
+                    className: 1050,
+                    subject: 1500,
+                    ppct: 950,
+                    sign: 1100,
+                    note: 1500
                 };
-                let wCustomEach = 1600;
-                if (customCount >= 3) wCustomEach = 1200;
-                else if (customCount === 2) wCustomEach = 1400;
+                let wCustomEach = 1500;
+                if (customCount >= 3) wCustomEach = 1100;
+                else if (customCount === 2) wCustomEach = 1300;
 
-                let used = wBase.day + wBase.session + wBase.period + wBase.subject + wBase.ppct;
+                let used = wBase.day + wBase.session + wBase.period + wBase.className + wBase.subject + wBase.ppct;
                 if (showSign) used += wBase.sign;
                 if (showNote) used += wBase.note;
                 used += (customCount * wCustomEach);
-                const wLesson = Math.max(3000, 14570 - used);
+                const wLesson = Math.max(3500, 14570 - used);
 
                 cols.forEach(col => {
                     if (col.key === 'day') col.width = wBase.day;
                     else if (col.key === 'session') col.width = wBase.session;
                     else if (col.key === 'period') col.width = wBase.period;
+                    else if (col.key === 'className') col.width = wBase.className;
                     else if (col.key === 'subject') col.width = wBase.subject;
                     else if (col.key === 'ppct') col.width = wBase.ppct;
                     else if (col.key === 'lesson') col.width = wLesson;
@@ -927,33 +930,34 @@ window.DocxGenerator = (function() {
                 if (customCount === 0 && !showSign && !showNote) {
                     cols.forEach(col => {
                         if (col.key === 'day') col.width = 1050;
-                        else if (col.key === 'session') col.width = 700;
+                        else if (col.key === 'session') col.width = 650;
                         else if (col.key === 'period') col.width = 500;
                         else if (col.key === 'className') col.width = 800;
-                        else if (col.key === 'subject') col.width = 1400;
+                        else if (col.key === 'subject') col.width = 1150;
                         else if (col.key === 'ppct') col.width = 750;
-                        else if (col.key === 'lesson') col.width = 2550;
-                        else if (col.key === 'integ') col.width = 2450;
+                        else if (col.key === 'lesson') col.width = 2400;
+                        else if (col.key === 'integ') col.width = 2300;
                     });
                 } else {
                     const wBase = {
                         day: 1050,
-                        session: 700,
+                        session: 650,
                         period: 500,
-                        subject: 1500,
+                        className: 800,
+                        subject: 1150,
                         ppct: 750,
                         sign: 750,
-                        note: 1100
+                        note: 1000
                     };
-                    let wCustomEach = 1000;
-                    if (customCount >= 3) wCustomEach = 800;
-                    else if (customCount === 2) wCustomEach = 900;
+                    let wCustomEach = 950;
+                    if (customCount >= 3) wCustomEach = 750;
+                    else if (customCount === 2) wCustomEach = 850;
 
-                    let used = wBase.day + wBase.session + wBase.period + wBase.subject + wBase.ppct;
+                    let used = wBase.day + wBase.session + wBase.period + wBase.className + wBase.subject + wBase.ppct;
                     if (showSign) used += wBase.sign;
                     if (showNote) used += wBase.note;
                     used += (customCount * wCustomEach);
-                    const rem = Math.max(3800, 9600 - used);
+                    const rem = Math.max(3500, 9600 - used);
                     const wLesson = Math.floor(rem * 0.49);
                     const wInteg = rem - wLesson;
 
@@ -961,6 +965,7 @@ window.DocxGenerator = (function() {
                         if (col.key === 'day') col.width = wBase.day;
                         else if (col.key === 'session') col.width = wBase.session;
                         else if (col.key === 'period') col.width = wBase.period;
+                        else if (col.key === 'className') col.width = wBase.className;
                         else if (col.key === 'subject') col.width = wBase.subject;
                         else if (col.key === 'ppct') col.width = wBase.ppct;
                         else if (col.key === 'lesson') col.width = wLesson;
@@ -972,28 +977,30 @@ window.DocxGenerator = (function() {
                 }
             } else {
                 const wBase = {
-                    day: 1150,
-                    session: 750,
-                    period: 550,
-                    subject: 1800,
+                    day: 1050,
+                    session: 700,
+                    period: 500,
+                    className: 850,
+                    subject: 1200,
                     ppct: 750,
                     sign: 800,
-                    note: 1300
+                    note: 1200
                 };
-                let wCustomEach = 1300;
-                if (customCount >= 3) wCustomEach = 900;
-                else if (customCount === 2) wCustomEach = 1100;
+                let wCustomEach = 1100;
+                if (customCount >= 3) wCustomEach = 800;
+                else if (customCount === 2) wCustomEach = 950;
 
-                let used = wBase.day + wBase.session + wBase.period + wBase.subject + wBase.ppct;
+                let used = wBase.day + wBase.session + wBase.period + wBase.className + wBase.subject + wBase.ppct;
                 if (showSign) used += wBase.sign;
                 if (showNote) used += wBase.note;
                 used += (customCount * wCustomEach);
-                const wLesson = Math.max(2200, 9600 - used);
+                const wLesson = Math.max(2600, 9600 - used);
 
                 cols.forEach(col => {
                     if (col.key === 'day') col.width = wBase.day;
                     else if (col.key === 'session') col.width = wBase.session;
                     else if (col.key === 'period') col.width = wBase.period;
+                    else if (col.key === 'className') col.width = wBase.className;
                     else if (col.key === 'subject') col.width = wBase.subject;
                     else if (col.key === 'ppct') col.width = wBase.ppct;
                     else if (col.key === 'lesson') col.width = wLesson;

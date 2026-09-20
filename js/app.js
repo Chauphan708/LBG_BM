@@ -209,6 +209,9 @@
         lbgShowBghSign: true,
         lbgShowHeadSign: true,
         lbgShowTeacherSign: true,
+        ppctFilterOnlyAssigned: true,
+        slotNotes: {},
+        slotCustomCols: {},
 
         settings: {
             governingBody: "UBND PHƯỜNG TRUNG NHỨT",
@@ -415,6 +418,14 @@
                 if (saved.lbgShowColSign !== undefined) state.lbgShowColSign = saved.lbgShowColSign;
                 if (saved.lbgShowColNote !== undefined) state.lbgShowColNote = saved.lbgShowColNote;
                 if (Array.isArray(saved.lbgCustomCols)) state.lbgCustomCols = saved.lbgCustomCols;
+                if (saved.lbgShowBghSign !== undefined) state.lbgShowBghSign = saved.lbgShowBghSign;
+                if (saved.lbgShowHeadSign !== undefined) state.lbgShowHeadSign = saved.lbgShowHeadSign;
+                if (saved.lbgShowTeacherSign !== undefined) state.lbgShowTeacherSign = saved.lbgShowTeacherSign;
+                if (saved.lbgOptHideEmptyRows !== undefined) state.lbgOptHideEmptyRows = saved.lbgOptHideEmptyRows;
+                if (saved.ctlopOptHideEmptyRows !== undefined) state.ctlopOptHideEmptyRows = saved.ctlopOptHideEmptyRows;
+                if (saved.ppctFilterOnlyAssigned !== undefined) state.ppctFilterOnlyAssigned = saved.ppctFilterOnlyAssigned;
+                if (saved.slotNotes && typeof saved.slotNotes === 'object') state.slotNotes = saved.slotNotes;
+                if (saved.slotCustomCols && typeof saved.slotCustomCols === 'object') state.slotCustomCols = saved.slotCustomCols;
             }
         } catch (e) {
             console.error("Error loading LBG_BM state from localStorage:", e);
@@ -439,7 +450,15 @@
                 currentWeek: state.currentWeek,
                 lbgShowColSign: state.lbgShowColSign,
                 lbgShowColNote: state.lbgShowColNote,
-                lbgCustomCols: state.lbgCustomCols
+                lbgCustomCols: state.lbgCustomCols,
+                lbgShowBghSign: state.lbgShowBghSign,
+                lbgShowHeadSign: state.lbgShowHeadSign,
+                lbgShowTeacherSign: state.lbgShowTeacherSign,
+                lbgOptHideEmptyRows: state.lbgOptHideEmptyRows,
+                ctlopOptHideEmptyRows: state.ctlopOptHideEmptyRows,
+                ppctFilterOnlyAssigned: state.ppctFilterOnlyAssigned,
+                slotNotes: state.slotNotes,
+                slotCustomCols: state.slotCustomCols
             };
 
             const payloadStr = JSON.stringify(toSave);
@@ -696,6 +715,269 @@
     }
 
     // =========================================================================
+    // DYNAMIC COLUMN ORDERING & MANAGEMENT (TAB 1 & TAB 2)
+    // =========================================================================
+    function getLbgOrderedColumns(customColsList, showSign, showNote, isCtlop) {
+        const enabledCustomCols = Array.isArray(customColsList) 
+            ? customColsList.filter(c => c && c.enabled !== false) 
+            : [];
+        
+        const cols = [];
+        
+        const pushCustom = (pos) => {
+            enabledCustomCols.filter(c => String(c.pos) === String(pos)).forEach(c => {
+                cols.push({
+                    key: 'custom_' + c.id,
+                    id: c.id,
+                    title: c.name || 'Cột mới',
+                    isCustom: true,
+                    pos: c.pos
+                });
+            });
+        };
+
+        // Pos 1: before day (Cột đầu tiên)
+        pushCustom('1');
+
+        // Day (Thứ, ngày)
+        cols.push({ key: 'day', title: 'Thứ, ngày', isCustom: false });
+
+        // Pos 2: after day
+        pushCustom('2');
+
+        // Session (Buổi)
+        cols.push({ key: 'session', title: 'Buổi', isCustom: false });
+
+        // Pos 3: after session
+        pushCustom('3');
+
+        // Period (Tiết)
+        cols.push({ key: 'period', title: 'Tiết', isCustom: false });
+
+        // Class (Lớp)
+        cols.push({ key: 'class', title: 'Lớp', isCustom: false });
+
+        // Pos 4: after class
+        pushCustom('4');
+
+        // Subject (Môn học) - CANH GIỮA VÀ GỌN GÀNG 110px
+        cols.push({ key: 'subject', title: 'Môn học', isCustom: false });
+
+        // Pos 5: after subject
+        pushCustom('5');
+
+        // PPCT (Tiết PPCT)
+        cols.push({ key: 'ppct', title: 'Tiết PPCT', isCustom: false });
+
+        // Pos 6: after ppct
+        pushCustom('6');
+
+        // Lesson (Tên bài dạy chi tiết)
+        cols.push({ key: 'lesson', title: 'Tên bài dạy chi tiết (Nhấp đúp vào ô để sửa trực tiếp)', isCustom: false });
+
+        // Pos 7: after lesson
+        pushCustom('7');
+
+        if (isCtlop) {
+            cols.push({ key: 'integ', title: 'Nội dung tích hợp / Điều chỉnh', isCustom: false });
+        }
+        if (showSign) {
+            cols.push({ key: 'sign', title: 'Kí tên', isCustom: false });
+        }
+        if (showNote) {
+            cols.push({ key: 'note', title: 'Ghi chú', isCustom: false });
+        }
+
+        // Pos end: at the end of the table
+        enabledCustomCols.filter(c => !['1', '2', '3', '4', '5', '6', '7'].includes(String(c.pos))).forEach(c => {
+            cols.push({
+                key: 'custom_' + c.id,
+                id: c.id,
+                title: c.name || 'Cột mới',
+                isCustom: true,
+                pos: c.pos || 'end'
+            });
+        });
+
+        return cols;
+    }
+
+    function renderCustomColsManager(containerId, isModal = false) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+
+        if (!Array.isArray(state.lbgCustomCols)) state.lbgCustomCols = [];
+
+        state.lbgCustomCols.forEach(col => {
+            const chip = document.createElement("div");
+            chip.className = "custom-col-chip";
+            chip.setAttribute("data-id", col.id);
+            chip.style.cssText = "display: inline-flex; align-items: center; gap: 0.25rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 0.15rem 0.35rem; font-size: 0.8rem;";
+
+            const chk = document.createElement("input");
+            chk.type = "checkbox";
+            chk.checked = (col.enabled !== false);
+            chk.title = "Bật/Tắt hiển thị cột này";
+            chk.style.cursor = "pointer";
+            chk.onchange = (e) => {
+                col.enabled = e.target.checked;
+                saveState();
+                renderCustomColsManager("lbg-custom-cols-list", false);
+                renderCustomColsManager("ctlop-custom-cols-list", false);
+                renderTabLbgTableOnly();
+                renderTabCtlopTableOnly();
+            };
+
+            const txt = document.createElement("input");
+            txt.type = "text";
+            txt.value = col.name || "Cột mới";
+            txt.style.cssText = "width: 75px; border: none; font-size: 0.78rem; font-weight: 600; padding: 0 2px; color: var(--text-main); background: transparent;";
+            txt.title = "Nhấp để đổi tên cột";
+            txt.oninput = (e) => {
+                col.name = e.target.value;
+                saveState();
+                ["lbg-custom-cols-list", "ctlop-custom-cols-list"].forEach(listId => {
+                    const otherInput = document.querySelector(`#${listId} .custom-col-chip[data-id="${col.id}"] input[type="text"]`);
+                    if (otherInput && otherInput.value !== e.target.value) otherInput.value = e.target.value;
+                });
+            };
+            txt.onblur = () => {
+                if (!col.name || !col.name.trim()) col.name = "Cột mới";
+                saveState();
+                renderTabLbgTableOnly();
+                renderTabCtlopTableOnly();
+            };
+
+            const sel = document.createElement("select");
+            sel.style.cssText = "font-size: 0.75rem; border: 1px solid #e2e8f0; border-radius: 3px; padding: 0 2px;";
+            sel.title = "Chọn vị trí cột trong bảng";
+            const posOptions = [
+                { val: "end", label: "Cuối bảng" },
+                { val: "1", label: "Đầu bảng" },
+                { val: "2", label: "Sau Thứ" },
+                { val: "3", label: "Sau Buổi" },
+                { val: "4", label: "Sau Lớp" },
+                { val: "5", label: "Sau Môn" },
+                { val: "6", label: "Sau PPCT" },
+                { val: "7", label: "Sau Tên bài" }
+            ];
+            posOptions.forEach(opt => {
+                const optEl = document.createElement("option");
+                optEl.value = opt.val;
+                optEl.innerText = opt.label;
+                if (String(col.pos || "end") === opt.val) optEl.selected = true;
+                sel.appendChild(optEl);
+            });
+            sel.onchange = (e) => {
+                col.pos = e.target.value;
+                saveState();
+                renderCustomColsManager("lbg-custom-cols-list", false);
+                renderCustomColsManager("ctlop-custom-cols-list", false);
+                renderTabLbgTableOnly();
+                renderTabCtlopTableOnly();
+            };
+
+            const btnDel = document.createElement("button");
+            btnDel.type = "button";
+            btnDel.innerText = "✕";
+            btnDel.title = "Xóa cột này";
+            btnDel.style.cssText = "background: none; border: none; color: #dc2626; cursor: pointer; font-weight: bold; font-size: 0.8rem; padding: 0 2px;";
+            btnDel.onclick = () => {
+                state.lbgCustomCols = state.lbgCustomCols.filter(c => c.id !== col.id);
+                saveState();
+                renderCustomColsManager("lbg-custom-cols-list", false);
+                renderCustomColsManager("ctlop-custom-cols-list", false);
+                renderTabLbgTableOnly();
+                renderTabCtlopTableOnly();
+            };
+
+            chip.appendChild(chk);
+            chip.appendChild(txt);
+            chip.appendChild(sel);
+            chip.appendChild(btnDel);
+            container.appendChild(chip);
+        });
+    }
+
+    function handleAddNewCustomCol() {
+        if (!Array.isArray(state.lbgCustomCols)) state.lbgCustomCols = [];
+        const num = state.lbgCustomCols.length + 1;
+        state.lbgCustomCols.push({
+            id: 'col_' + Date.now(),
+            name: `Cột mới ${num}`,
+            pos: 'end',
+            enabled: true
+        });
+        saveState();
+        renderCustomColsManager("lbg-custom-cols-list", false);
+        renderCustomColsManager("ctlop-custom-cols-list", false);
+        renderTabLbgTableOnly();
+        renderTabCtlopTableOnly();
+        showToast("Đã thêm cột mới! Thầy/Cô có thể đổi tên và vị trí tùy ý.", "success");
+    }
+
+    function purgeUnassignedSubjectsData() {
+        if (!Array.isArray(state.assignedSubjects) || state.assignedSubjects.length === 0) {
+            alert("Thầy/Cô chưa chọn môn phụ trách nào! Vui lòng tick chọn ít nhất 1 môn phía trên trước khi thực hiện.");
+            return;
+        }
+        const confirmMsg = `Hệ thống sẽ giữ lại dữ liệu các môn Thầy/Cô đang phụ trách:\n👉 ${state.assignedSubjects.join(', ')}\n\nVà XÓA TOÀN BỘ bài dạy của các môn không dạy từ Khối 1 đến Khối 5 để giải phóng 90% dung lượng lưu trữ.\n\n(Thầy/Cô có thể bấm "Khôi Phục Kho Môn Gốc" bất kỳ lúc nào nếu cần).\n\nThầy/Cô có chắc chắn muốn xóa?`;
+        if (!confirm(confirmMsg)) return;
+
+        const assignedNorms = state.assignedSubjects.map(s => normalizeSubjectName(s));
+        let totalPurged = 0;
+        let totalKept = 0;
+
+        for (let g = 1; g <= 5; g++) {
+            if (Array.isArray(state.gradeCurricula[g])) {
+                const before = state.gradeCurricula[g].length;
+                state.gradeCurricula[g] = state.gradeCurricula[g].filter(item => {
+                    const norm = normalizeSubjectName(item.subject);
+                    return assignedNorms.includes(norm);
+                });
+                const after = state.gradeCurricula[g].length;
+                totalPurged += (before - after);
+                totalKept += after;
+            }
+        }
+
+        // Clean timetable slots with unassigned subjects
+        if (Array.isArray(state.timetable)) {
+            state.timetable.forEach(slot => {
+                if (slot.subject && !slot.subject.startsWith("--")) {
+                    const norm = normalizeSubjectName(slot.subject);
+                    if (!assignedNorms.includes(norm)) {
+                        slot.className = "-- Trống --";
+                        slot.subject = "-- Nghỉ / Để trống --";
+                    }
+                }
+            });
+        }
+
+        saveState();
+        renderAssignedSubjectsSection();
+        renderMasterTimetableMatrix();
+        renderMasterTimetableDetailed();
+        renderTabPpct();
+        renderTabLbgTableOnly();
+        renderTabCtlopTableOnly();
+
+        showToast(`Đã giải phóng bộ nhớ! Xóa ${totalPurged} tiết môn không dạy, giữ lại ${totalKept} tiết môn phụ trách.`, "success");
+    }
+
+    function restoreAllSubjectsData() {
+        if (!confirm("Thầy/Cô có muốn nạp lại đầy đủ dữ liệu phân phối chương trình của tất cả các môn từ kho gốc không?")) return;
+
+        initGradeCurricula();
+        saveState();
+        renderTabPpct();
+        renderTabLbgTableOnly();
+        renderTabCtlopTableOnly();
+        showToast("Đã khôi phục dữ liệu tất cả các môn từ kho mẫu gốc thành công!", "success");
+    }
+
+    // =========================================================================
     // TAB 1: RENDER LỊCH BÁO GIẢNG GVBM (TỔNG HỢP)
     // =========================================================================
     function renderTabLbg() {
@@ -718,7 +1000,6 @@
             campusSelect.value = state.filterCampus;
             campusSelect.onchange = (e) => {
                 state.filterCampus = e.target.value;
-                // update class filter dropdown based on campus
                 updateLbgClassFilterDropdown();
                 renderTabLbgTableOnly();
             };
@@ -729,12 +1010,32 @@
         // Checkbox hide empty rows
         const hideEmptyCheck = document.getElementById("lbg-opt-hide-empty-rows");
         if (hideEmptyCheck) {
-            hideEmptyCheck.checked = state.lbgOptHideEmptyRows;
+            hideEmptyCheck.checked = !!state.lbgOptHideEmptyRows;
             hideEmptyCheck.onchange = (e) => {
                 state.lbgOptHideEmptyRows = e.target.checked;
+                const other = document.getElementById("ctlop-opt-hide-empty-rows");
+                if (other) other.checked = e.target.checked;
+                state.ctlopOptHideEmptyRows = e.target.checked;
+                saveState();
                 renderTabLbgTableOnly();
+                renderTabCtlopTableOnly();
             };
         }
+
+        // Sync option checkboxes
+        const chkSign = document.getElementById("lbg-opt-col-sign");
+        if (chkSign) chkSign.checked = !!state.lbgShowColSign;
+        const chkNote = document.getElementById("lbg-opt-col-note");
+        if (chkNote) chkNote.checked = (state.lbgShowColNote !== false);
+        const chkBgh = document.getElementById("lbg-opt-sig-bgh");
+        if (chkBgh) chkBgh.checked = (state.lbgShowBghSign !== false);
+        const chkHead = document.getElementById("lbg-opt-sig-head");
+        if (chkHead) chkHead.checked = (state.lbgShowHeadSign !== false);
+        const chkTeacher = document.getElementById("lbg-opt-sig-teacher");
+        if (chkTeacher) chkTeacher.checked = (state.lbgShowTeacherSign !== false);
+
+        // Render dynamic custom column chips
+        renderCustomColsManager("lbg-custom-cols-list", false);
 
         // Header info
         const govBody = document.getElementById("lbg-gov-body");
@@ -777,6 +1078,14 @@
             if (bghRole) bghRole.textContent = bghSigner.roleTitle;
         }
 
+        // Toggle signature boxes visibility
+        const boxBgh = document.getElementById("lbg-sig-box-bgh");
+        if (boxBgh) boxBgh.style.display = (state.lbgShowBghSign !== false) ? "" : "none";
+        const boxHead = document.getElementById("lbg-sig-box-head");
+        if (boxHead) boxHead.style.display = (state.lbgShowHeadSign !== false) ? "" : "none";
+        const boxTeacher = document.getElementById("lbg-sig-box-teacher");
+        if (boxTeacher) boxTeacher.style.display = (state.lbgShowTeacherSign !== false) ? "" : "none";
+
         renderTabLbgTableOnly();
     }
 
@@ -812,8 +1121,31 @@
             state.lbgOptHideEmptyRows
         );
 
+        const orderedCols = getLbgOrderedColumns(state.lbgCustomCols, state.lbgShowColSign, state.lbgShowColNote, false);
+
+        // Dynamically update Table Header columns
+        const theadTr = document.querySelector("#tab-lbg .table-lbg thead tr");
+        if (theadTr) {
+            let colsHtml = "";
+            orderedCols.forEach(col => {
+                if (col.key === 'day') colsHtml += `<th style="width: 105px;">Thứ, ngày</th>`;
+                else if (col.key === 'session') colsHtml += `<th style="width: 60px;">Buổi</th>`;
+                else if (col.key === 'period') colsHtml += `<th style="width: 45px;">Tiết</th>`;
+                else if (col.key === 'class') colsHtml += `<th style="width: 80px; text-align: center; background: #e0e7ff; color: #312e81; font-weight: 800;">Lớp</th>`;
+                else if (col.key === 'subject') colsHtml += `<th style="width: 110px; text-align: center;">Môn học</th>`;
+                else if (col.key === 'ppct') colsHtml += `<th style="width: 75px; text-align: center;">Tiết PPCT</th>`;
+                else if (col.key === 'lesson') colsHtml += `<th>Tên bài dạy chi tiết (Nhấp đúp vào ô để sửa trực tiếp)</th>`;
+                else if (col.key === 'sign') colsHtml += `<th style="width: 75px; text-align: center;" class="col-sign">Kí tên</th>`;
+                else if (col.key === 'note') colsHtml += `<th style="width: 120px;" class="col-note">Ghi chú</th>`;
+                else if (col.isCustom) colsHtml += `<th style="width: 110px;" class="col-custom col-custom-${col.id}">${escapeHtml(col.title)}</th>`;
+            });
+            colsHtml += `<th style="width: 75px;" class="no-print">Thao tác</th>`;
+            theadTr.innerHTML = colsHtml;
+        }
+
         if (schedule.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 2rem; color: var(--text-muted);">Không có tiết dạy nào phù hợp với bộ lọc hiện tại.</td></tr>`;
+            const totalCols = orderedCols.length + 1;
+            tbody.innerHTML = `<tr><td colspan="${totalCols}" style="text-align:center; padding: 2rem; color: var(--text-muted);">Không có tiết dạy nào phù hợp với bộ lọc hiện tại.</td></tr>`;
             updateLbgStatistics(schedule);
             return;
         }
@@ -832,34 +1164,72 @@
 
             for (let k = i; k < j; k++) {
                 const row = schedule[k];
+                const rowKey = `w${weekNum}_s${row.slotIndex}`;
                 html += "<tr>";
+
+                let dayCellHtml = "";
                 if (k === i) {
-                    html += `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; background: #fafafa;">${dateStr.replace('\n', '<br><span style="font-size:0.8em;font-weight:normal;color:#64748b;">')}</span></td>`;
+                    dayCellHtml = `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; background: #fafafa;">${dateStr.replace('\n', '<br><span style="font-size:0.8em;font-weight:normal;color:#64748b;">')}</span></td>`;
                 }
 
-                html += `<td style="text-align: center; vertical-align: middle;">${escapeHtml(row.session)}</td>`;
-                html += `<td style="text-align: center; vertical-align: middle; font-weight: 700;">${row.period}</td>`;
+                orderedCols.forEach(col => {
+                    if (col.key === 'day') {
+                        if (dayCellHtml) html += dayCellHtml;
+                    } else if (col.key === 'session') {
+                        html += `<td style="text-align: center; vertical-align: middle;">${escapeHtml(row.session)}</td>`;
+                    } else if (col.key === 'period') {
+                        html += `<td style="text-align: center; vertical-align: middle; font-weight: 700;">${row.period}</td>`;
+                    } else if (col.key === 'class') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">--</td>`;
+                        } else {
+                            const badgeCls = getCampusBadgeClass(row.campusId);
+                            html += `<td style="text-align: center; vertical-align: middle;"><span class="${badgeCls}">${escapeHtml(row.className)}</span></td>`;
+                        }
+                    } else if (col.key === 'subject') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">-- Nghỉ --</td>`;
+                        } else {
+                            html += `<td style="text-align: center; font-weight: 600; vertical-align: middle;">${escapeHtml(row.subject)}</td>`;
+                        }
+                    } else if (col.key === 'ppct') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8;">-</td>`;
+                        } else {
+                            html += `<td style="text-align: center; font-weight: 700; vertical-align: middle; color: var(--primary);">${row.ppct || ''}</td>`;
+                        }
+                    } else if (col.key === 'lesson') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">-- Để trống --</td>`;
+                        } else {
+                            html += `<td style="vertical-align: middle; cursor: pointer;" title="Nhấp đúp để chỉnh sửa tên bài dạy" ondblclick="editLessonNameInline(${row.grade}, '${escapeHtml(row.normSub)}', ${weekNum}, ${row.periodInWeek}, this)">${escapeHtml(row.lessonName || '')}</td>`;
+                        }
+                    } else if (col.key === 'sign') {
+                        html += `<td class="col-sign" style="text-align: center; color: #94a3b8;"></td>`;
+                    } else if (col.key === 'note') {
+                        const noteVal = (state.slotNotes && state.slotNotes[rowKey]) || row.note || '';
+                        html += `<td class="col-note editable-cell" contenteditable="${!row.isEmpty}" data-key="${rowKey}" data-field="note" style="font-size: 0.85rem; text-align: left; vertical-align: middle;">${escapeHtml(noteVal)}</td>`;
+                    } else if (col.isCustom) {
+                        const customVal = (state.slotCustomCols && state.slotCustomCols[rowKey] && state.slotCustomCols[rowKey][col.id]) || '';
+                        html += `<td class="col-custom editable-cell" contenteditable="${!row.isEmpty}" data-key="${rowKey}" data-field="customCol_${col.id}" data-col-id="${col.id}" style="font-size: 0.85rem; text-align: left; vertical-align: middle;">${escapeHtml(customVal)}</td>`;
+                    }
+                });
 
                 if (row.isEmpty) {
-                    html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">--</td>`;
-                    html += `<td colspan="3" style="text-align: center; color: #94a3b8; font-style: italic;">-- Nghỉ / Để trống --</td>`;
                     html += `<td class="no-print" style="text-align: center;">-</td>`;
                 } else {
-                    const badgeCls = getCampusBadgeClass(row.campusId);
-                    html += `<td style="text-align: center; vertical-align: middle;"><span class="${badgeCls}">${escapeHtml(row.className)}</span></td>`;
-                    html += `<td style="font-weight: 600; vertical-align: middle;">${escapeHtml(row.subject)}</td>`;
-                    html += `<td style="text-align: center; font-weight: 700; vertical-align: middle; color: var(--primary);">${row.ppct || ''}</td>`;
-                    html += `<td style="vertical-align: middle; cursor: pointer;" title="Nhấp đúp để chỉnh sửa tên bài dạy" ondblclick="editLessonNameInline(${row.grade}, '${escapeHtml(row.normSub)}', ${weekNum}, ${row.periodInWeek}, this)">${escapeHtml(row.lessonName || '')}</td>`;
                     html += `<td class="no-print" style="text-align: center; vertical-align: middle;">
                         <button type="button" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;" onclick="openSlotEditPrompt(${row.slotIndex})">✏️</button>
                     </td>`;
                 }
+
                 html += "</tr>";
             }
             i = j;
         }
 
         tbody.innerHTML = html;
+        bindTableEditableBlurEvents(tbody);
         updateLbgStatistics(schedule);
     }
 
@@ -920,12 +1290,32 @@
 
         const hideEmptyCheck = document.getElementById("ctlop-opt-hide-empty-rows");
         if (hideEmptyCheck) {
-            hideEmptyCheck.checked = state.ctlopOptHideEmptyRows;
+            hideEmptyCheck.checked = !!state.ctlopOptHideEmptyRows;
             hideEmptyCheck.onchange = (e) => {
                 state.ctlopOptHideEmptyRows = e.target.checked;
+                const other = document.getElementById("lbg-opt-hide-empty-rows");
+                if (other) other.checked = e.target.checked;
+                state.lbgOptHideEmptyRows = e.target.checked;
+                saveState();
+                renderTabLbgTableOnly();
                 renderTabCtlopTableOnly();
             };
         }
+
+        // Sync option checkboxes
+        const chkSign = document.getElementById("ctlop-opt-col-sign");
+        if (chkSign) chkSign.checked = !!state.lbgShowColSign;
+        const chkNote = document.getElementById("ctlop-opt-col-note");
+        if (chkNote) chkNote.checked = (state.lbgShowColNote !== false);
+        const chkBgh = document.getElementById("ctlop-opt-sig-bgh");
+        if (chkBgh) chkBgh.checked = (state.lbgShowBghSign !== false);
+        const chkHead = document.getElementById("ctlop-opt-sig-head");
+        if (chkHead) chkHead.checked = (state.lbgShowHeadSign !== false);
+        const chkTeacher = document.getElementById("ctlop-opt-sig-teacher");
+        if (chkTeacher) chkTeacher.checked = (state.lbgShowTeacherSign !== false);
+
+        // Render dynamic custom column chips
+        renderCustomColsManager("ctlop-custom-cols-list", false);
 
         // Header info
         const govBody = document.getElementById("ctlop-gov-body");
@@ -963,6 +1353,14 @@
             sigPht.textContent = bghSigner.name;
         }
 
+        // Toggle signature boxes visibility
+        const boxBgh = document.getElementById("ctlop-sig-box-bgh");
+        if (boxBgh) boxBgh.style.display = (state.lbgShowBghSign !== false) ? "" : "none";
+        const boxHead = document.getElementById("ctlop-sig-box-head");
+        if (boxHead) boxHead.style.display = (state.lbgShowHeadSign !== false) ? "" : "none";
+        const boxTeacher = document.getElementById("ctlop-sig-box-teacher");
+        if (boxTeacher) boxTeacher.style.display = (state.lbgShowTeacherSign !== false) ? "" : "none";
+
         renderTabCtlopTableOnly();
     }
 
@@ -980,8 +1378,32 @@
             state.ctlopOptHideEmptyRows
         );
 
+        const orderedCols = getLbgOrderedColumns(state.lbgCustomCols, state.lbgShowColSign, state.lbgShowColNote, true);
+
+        // Dynamically update Table Header columns
+        const theadTr = document.querySelector("#tab-ctlop .table-lbg thead tr");
+        if (theadTr) {
+            let colsHtml = "";
+            orderedCols.forEach(col => {
+                if (col.key === 'day') colsHtml += `<th style="width: 105px;">Thứ, ngày</th>`;
+                else if (col.key === 'session') colsHtml += `<th style="width: 60px;">Buổi</th>`;
+                else if (col.key === 'period') colsHtml += `<th style="width: 45px;">Tiết</th>`;
+                else if (col.key === 'class') colsHtml += `<th style="width: 80px; text-align: center; background: #e0e7ff; color: #312e81; font-weight: 800;">Lớp</th>`;
+                else if (col.key === 'subject') colsHtml += `<th style="width: 110px; text-align: center;">Môn học</th>`;
+                else if (col.key === 'ppct') colsHtml += `<th style="width: 75px; text-align: center;">Tiết PPCT</th>`;
+                else if (col.key === 'lesson') colsHtml += `<th style="min-width: 240px;">Tên bài dạy chi tiết</th>`;
+                else if (col.key === 'integ') colsHtml += `<th style="min-width: 220px;">Nội dung tích hợp / Điều chỉnh</th>`;
+                else if (col.key === 'sign') colsHtml += `<th style="width: 75px; text-align: center;" class="col-sign">Kí tên</th>`;
+                else if (col.key === 'note') colsHtml += `<th style="width: 120px;" class="col-note">Ghi chú</th>`;
+                else if (col.isCustom) colsHtml += `<th style="width: 110px;" class="col-custom col-custom-${col.id}">${escapeHtml(col.title)}</th>`;
+            });
+            colsHtml += `<th style="width: 75px;" class="no-print">Thao tác</th>`;
+            theadTr.innerHTML = colsHtml;
+        }
+
         if (schedule.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 2rem; color: var(--text-muted);">Không có tiết dạy nào tại lớp được chọn trong tuần này.</td></tr>`;
+            const totalCols = orderedCols.length + 1;
+            tbody.innerHTML = `<tr><td colspan="${totalCols}" style="text-align:center; padding: 2rem; color: var(--text-muted);">Không có tiết dạy nào tại lớp được chọn trong tuần này.</td></tr>`;
             return;
         }
 
@@ -998,35 +1420,100 @@
 
             for (let k = i; k < j; k++) {
                 const row = schedule[k];
+                const rowKey = `w${weekNum}_s${row.slotIndex}`;
                 html += "<tr>";
+
+                let dayCellHtml = "";
                 if (k === i) {
-                    html += `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; background: #fafafa;">${dateStr.replace('\n', '<br><span style="font-size:0.8em;font-weight:normal;color:#64748b;">')}</span></td>`;
+                    dayCellHtml = `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; background: #fafafa;">${dateStr.replace('\n', '<br><span style="font-size:0.8em;font-weight:normal;color:#64748b;">')}</span></td>`;
                 }
 
-                html += `<td style="text-align: center; vertical-align: middle;">${escapeHtml(row.session)}</td>`;
-                html += `<td style="text-align: center; vertical-align: middle; font-weight: 700;">${row.period}</td>`;
+                orderedCols.forEach(col => {
+                    if (col.key === 'day') {
+                        if (dayCellHtml) html += dayCellHtml;
+                    } else if (col.key === 'session') {
+                        html += `<td style="text-align: center; vertical-align: middle;">${escapeHtml(row.session)}</td>`;
+                    } else if (col.key === 'period') {
+                        html += `<td style="text-align: center; vertical-align: middle; font-weight: 700;">${row.period}</td>`;
+                    } else if (col.key === 'class') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8;">--</td>`;
+                        } else {
+                            const badgeCls = getCampusBadgeClass(row.campusId);
+                            html += `<td style="text-align: center; vertical-align: middle;"><span class="${badgeCls}">${escapeHtml(row.className)}</span></td>`;
+                        }
+                    } else if (col.key === 'subject') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">-- Nghỉ --</td>`;
+                        } else {
+                            html += `<td style="text-align: center; font-weight: 600; vertical-align: middle;">${escapeHtml(row.subject)}</td>`;
+                        }
+                    } else if (col.key === 'ppct') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8;">-</td>`;
+                        } else {
+                            html += `<td style="text-align: center; font-weight: 700; vertical-align: middle; color: var(--primary);">${row.ppct || ''}</td>`;
+                        }
+                    } else if (col.key === 'lesson') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8; font-style: italic;">-- Để trống --</td>`;
+                        } else {
+                            html += `<td style="vertical-align: middle;">${escapeHtml(row.lessonName || '')}</td>`;
+                        }
+                    } else if (col.key === 'integ') {
+                        if (row.isEmpty) {
+                            html += `<td style="text-align: center; color: #94a3b8;"></td>`;
+                        } else {
+                            html += `<td style="vertical-align: middle; font-size: 0.85rem; color: #047857;" title="Nhấp đúp để sửa nội dung tích hợp" ondblclick="editIntegrationInline(${row.grade}, '${escapeHtml(row.normSub)}', ${weekNum}, ${row.periodInWeek}, this)">${escapeHtml(row.integration || '').replace(/\n/g, '<br>')}</td>`;
+                        }
+                    } else if (col.key === 'sign') {
+                        html += `<td class="col-sign" style="text-align: center; color: #94a3b8;"></td>`;
+                    } else if (col.key === 'note') {
+                        const noteVal = (state.slotNotes && state.slotNotes[rowKey]) || row.note || '';
+                        html += `<td class="col-note editable-cell" contenteditable="${!row.isEmpty}" data-key="${rowKey}" data-field="note" style="font-size: 0.85rem; text-align: left; vertical-align: middle;">${escapeHtml(noteVal)}</td>`;
+                    } else if (col.isCustom) {
+                        const customVal = (state.slotCustomCols && state.slotCustomCols[rowKey] && state.slotCustomCols[rowKey][col.id]) || '';
+                        html += `<td class="col-custom editable-cell" contenteditable="${!row.isEmpty}" data-key="${rowKey}" data-field="customCol_${col.id}" data-col-id="${col.id}" style="font-size: 0.85rem; text-align: left; vertical-align: middle;">${escapeHtml(customVal)}</td>`;
+                    }
+                });
 
                 if (row.isEmpty) {
-                    html += `<td style="text-align: center; color: #94a3b8;">--</td>`;
-                    html += `<td colspan="4" style="text-align: center; color: #94a3b8; font-style: italic;">-- Nghỉ / Để trống --</td>`;
                     html += `<td class="no-print" style="text-align: center;">-</td>`;
                 } else {
-                    const badgeCls = getCampusBadgeClass(row.campusId);
-                    html += `<td style="text-align: center; vertical-align: middle;"><span class="${badgeCls}">${escapeHtml(row.className)}</span></td>`;
-                    html += `<td style="font-weight: 600; vertical-align: middle;">${escapeHtml(row.subject)}</td>`;
-                    html += `<td style="text-align: center; font-weight: 700; vertical-align: middle; color: var(--primary);">${row.ppct || ''}</td>`;
-                    html += `<td style="vertical-align: middle;">${escapeHtml(row.lessonName || '')}</td>`;
-                    html += `<td style="vertical-align: middle; font-size: 0.85rem; color: #047857;" title="Nhấp đúp để sửa nội dung tích hợp" ondblclick="editIntegrationInline(${row.grade}, '${escapeHtml(row.normSub)}', ${weekNum}, ${row.periodInWeek}, this)">${escapeHtml(row.integration || '').replace(/\n/g, '<br>')}</td>`;
                     html += `<td class="no-print" style="text-align: center; vertical-align: middle;">
                         <button type="button" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;" onclick="openSlotEditPrompt(${row.slotIndex})">✏️</button>
                     </td>`;
                 }
+
                 html += "</tr>";
             }
             i = j;
         }
 
         tbody.innerHTML = html;
+        bindTableEditableBlurEvents(tbody);
+    }
+
+    function bindTableEditableBlurEvents(tbody) {
+        if (!tbody) return;
+        tbody.querySelectorAll(".editable-cell").forEach(cell => {
+            cell.addEventListener("blur", (e) => {
+                const key = e.target.dataset.key;
+                const field = e.target.dataset.field;
+                const colId = e.target.dataset.colId;
+                const val = e.target.innerText.trim();
+                if (!key) return;
+                if (field === "note") {
+                    if (!state.slotNotes) state.slotNotes = {};
+                    state.slotNotes[key] = val;
+                } else if (colId) {
+                    if (!state.slotCustomCols) state.slotCustomCols = {};
+                    if (!state.slotCustomCols[key]) state.slotCustomCols[key] = {};
+                    state.slotCustomCols[key][colId] = val;
+                }
+                saveState();
+            });
+        });
     }
 
     // =========================================================================
@@ -1165,6 +1652,28 @@
             };
         }
 
+        const chkFilter = document.getElementById("ppct-filter-only-assigned");
+        if (chkFilter) {
+            chkFilter.checked = (state.ppctFilterOnlyAssigned !== false);
+            chkFilter.onchange = (e) => {
+                state.ppctFilterOnlyAssigned = e.target.checked;
+                saveState();
+                updatePpctSubjectDropdown();
+                renderTabPpctTableOnly();
+            };
+        }
+
+        const btnManageSubs = document.getElementById("btn-ppct-manage-subjects");
+        if (btnManageSubs) {
+            btnManageSubs.onclick = () => {
+                switchActiveTab("tab-settings");
+                setTimeout(() => {
+                    const el = document.getElementById("assigned-subjects-tags-container");
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            };
+        }
+
         updatePpctSubjectDropdown();
         renderTabPpctTableOnly();
     }
@@ -1175,7 +1684,20 @@
 
         const grade = state.ppctCurrentGrade;
         const ppctList = state.gradeCurricula[grade] || [];
-        const subjects = [...new Set(ppctList.map(x => x.subject))];
+        let subjects = [...new Set(ppctList.map(x => x.subject))];
+
+        const chkFilter = document.getElementById("ppct-filter-only-assigned");
+        if (chkFilter) {
+            chkFilter.checked = (state.ppctFilterOnlyAssigned !== false);
+        }
+
+        if (state.ppctFilterOnlyAssigned !== false && Array.isArray(state.assignedSubjects) && state.assignedSubjects.length > 0) {
+            const assignedNorms = state.assignedSubjects.map(s => normalizeSubjectName(s));
+            const filtered = subjects.filter(s => assignedNorms.includes(normalizeSubjectName(s)));
+            if (filtered.length > 0) {
+                subjects = filtered;
+            }
+        }
 
         if (!subjects.includes(state.ppctCurrentSubject) && subjects.length > 0) {
             // Find a subject in assignedSubjects if possible
@@ -1183,7 +1705,11 @@
             state.ppctCurrentSubject = match || subjects[0];
         }
 
-        subSelect.innerHTML = subjects.map(s => `<option value="${escapeHtml(s)}" ${s === state.ppctCurrentSubject ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('');
+        if (subjects.length === 0) {
+            subSelect.innerHTML = `<option value="">-- Chưa có môn phụ trách nào trong khối này --</option>`;
+        } else {
+            subSelect.innerHTML = subjects.map(s => `<option value="${escapeHtml(s)}" ${s === state.ppctCurrentSubject ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('');
+        }
 
         subSelect.onchange = (e) => {
             state.ppctCurrentSubject = e.target.value;
@@ -1741,6 +2267,218 @@
     }
 
     // =========================================================================
+    // MULTI-SUBJECT KHDH & PPCT EXPORT (MODAL & ENGINES)
+    // =========================================================================
+    function openMultiExportKhdhModal() {
+        const modal = document.getElementById("modal-khdh-multi-export");
+        if (!modal) return;
+
+        const gradeSelect = document.getElementById("multi-export-grade-select");
+        if (gradeSelect) {
+            gradeSelect.value = state.ppctCurrentGrade ? String(state.ppctCurrentGrade) : "5";
+        }
+
+        renderMultiExportSubjectsList();
+        modal.style.display = "flex";
+    }
+
+    function closeMultiExportKhdhModal() {
+        const modal = document.getElementById("modal-khdh-multi-export");
+        if (modal) modal.style.display = "none";
+    }
+
+    function renderMultiExportSubjectsList() {
+        const container = document.getElementById("multi-export-subjects-checklist");
+        const gradeSelect = document.getElementById("multi-export-grade-select");
+        if (!container || !gradeSelect) return;
+
+        const selectedGrade = gradeSelect.value;
+        const assignedNorms = (state.assignedSubjects || []).map(s => normalizeSubjectName(s));
+
+        let availableSubjects = [];
+        const subjectLessonCounts = {};
+        const gradesToCheck = (selectedGrade === "all") ? [1, 2, 3, 4, 5] : [parseInt(selectedGrade, 10)];
+
+        gradesToCheck.forEach(g => {
+            const list = state.gradeCurricula[g] || [];
+            list.forEach(item => {
+                if (item.subject) {
+                    if (!availableSubjects.includes(item.subject)) {
+                        availableSubjects.push(item.subject);
+                    }
+                    subjectLessonCounts[item.subject] = (subjectLessonCounts[item.subject] || 0) + 1;
+                }
+            });
+        });
+
+        (state.assignedSubjects || []).forEach(sub => {
+            if (!availableSubjects.includes(sub)) {
+                availableSubjects.push(sub);
+            }
+        });
+
+        if (availableSubjects.length === 0) {
+            container.innerHTML = `<div style="padding: 1rem; text-align: center; color: #64748b;">Không có dữ liệu môn học nào cho khối này.</div>`;
+            return;
+        }
+
+        availableSubjects.sort((a, b) => {
+            const aAssigned = assignedNorms.includes(normalizeSubjectName(a)) ? 0 : 1;
+            const bAssigned = assignedNorms.includes(normalizeSubjectName(b)) ? 0 : 1;
+            if (aAssigned !== bAssigned) return aAssigned - bAssigned;
+            return a.localeCompare(b);
+        });
+
+        container.innerHTML = availableSubjects.map(sub => {
+            const isAssigned = assignedNorms.includes(normalizeSubjectName(sub));
+            const count = subjectLessonCounts[sub] || 0;
+            const isChecked = isAssigned || (state.assignedSubjects.length === 0);
+
+            return `
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.65rem; background: ${isAssigned ? '#eff6ff' : '#fff'}; border: 1px solid ${isAssigned ? '#93c5fd' : '#e2e8f0'}; border-radius: 6px; cursor: pointer;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" class="multi-export-subject-item" value="${escapeHtml(sub)}" ${isChecked ? 'checked' : ''} style="width: 17px; height: 17px; accent-color: var(--primary);">
+                        <span style="font-weight: ${isAssigned ? '700' : '500'}; color: ${isAssigned ? '#1e3a8a' : '#1e293b'};">
+                            ${escapeHtml(sub)}
+                        </span>
+                        ${isAssigned ? '<span style="font-size: 0.72rem; background: #dbeafe; color: #1e40af; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700;">Môn phụ trách</span>' : ''}
+                    </div>
+                    <span style="font-size: 0.8rem; color: #64748b;">${count > 0 ? count + ' tiết' : 'Chưa có bài'}</span>
+                </label>
+            `;
+        }).join('');
+    }
+
+    function doMultiExportDocx() {
+        const gradeSelect = document.getElementById("multi-export-grade-select");
+        const checkedItems = document.querySelectorAll(".multi-export-subject-item:checked");
+        const selectedSubjects = Array.from(checkedItems).map(inp => inp.value);
+
+        if (selectedSubjects.length === 0) {
+            alert("Thầy/Cô vui lòng tick chọn ít nhất 1 môn để xuất KHDH!");
+            return;
+        }
+
+        const selectedGrade = gradeSelect ? gradeSelect.value : "5";
+        const gradesToCheck = (selectedGrade === "all") ? [1, 2, 3, 4, 5] : [parseInt(selectedGrade, 10)];
+
+        const subjectsData = [];
+        selectedSubjects.forEach(sub => {
+            let combinedRows = [];
+            gradesToCheck.forEach(g => {
+                const list = (state.gradeCurricula[g] || []).filter(item => item.subject === sub);
+                combinedRows.push(...list);
+            });
+
+            if (combinedRows.length > 0) {
+                subjectsData.push({
+                    subjectName: sub,
+                    rows: combinedRows
+                });
+            }
+        });
+
+        if (subjectsData.length === 0) {
+            alert("Không tìm thấy dữ liệu bài dạy nào cho các môn đã chọn!");
+            return;
+        }
+
+        const genFn = window.generateKhdhDocx || (window.DocxGenerator && window.DocxGenerator.generateKhdhDocx);
+        if (!genFn) {
+            showToast("Không tìm thấy bộ tạo Word KHDH!", "error");
+            return;
+        }
+
+        const gradeLabel = (selectedGrade === "all") ? "Khoi_1-5" : `Khoi_${selectedGrade}`;
+
+        genFn({
+            grade: (selectedGrade === "all") ? "1, 2, 3, 4, 5" : selectedGrade,
+            isMultiSubject: subjectsData.length > 1,
+            subjectsData: subjectsData,
+            settings: state.settings
+        }).then(blob => {
+            const safeYear = (state.settings.academicYear || "2026-2027").replace(/\s+/g, '');
+            const filename = `KHDH_DaMon_${gradeLabel}_${subjectsData.length}Mon_${safeYear}.docx`;
+            saveAs(blob, filename);
+            closeMultiExportKhdhModal();
+            showToast(`Đã xuất file Word KHDH gộp (${subjectsData.length} môn): ${filename}`, "success");
+        }).catch(err => {
+            console.error("Multi-export Docx error:", err);
+            alert("Lỗi xuất Word KHDH Đa Môn: " + err.message);
+        });
+    }
+
+    function doMultiExportExcel() {
+        const gradeSelect = document.getElementById("multi-export-grade-select");
+        const checkedItems = document.querySelectorAll(".multi-export-subject-item:checked");
+        const selectedSubjects = Array.from(checkedItems).map(inp => inp.value);
+
+        if (selectedSubjects.length === 0) {
+            alert("Thầy/Cô vui lòng tick chọn ít nhất 1 môn để xuất Excel PPCT!");
+            return;
+        }
+
+        const selectedGrade = gradeSelect ? gradeSelect.value : "5";
+        const gradesToCheck = (selectedGrade === "all") ? [1, 2, 3, 4, 5] : [parseInt(selectedGrade, 10)];
+
+        const wb = XLSX.utils.book_new();
+        let totalSheets = 0;
+
+        selectedSubjects.forEach(sub => {
+            let combinedRows = [];
+            gradesToCheck.forEach(g => {
+                const list = (state.gradeCurricula[g] || []).filter(item => item.subject === sub);
+                list.forEach(r => {
+                    combinedRows.push({ ...r, grade: g });
+                });
+            });
+
+            if (combinedRows.length > 0) {
+                const header = ["Khối", "Tuần", "Môn học", "Tiết/Tuần", "Tiết PPCT", "Tên bài dạy", "Nội dung tích hợp / Điều chỉnh", "Thời lượng"];
+                const rows = combinedRows.map(item => [
+                    item.grade || selectedGrade,
+                    item.week,
+                    item.subject,
+                    item.periodInWeek || 1,
+                    item.ppct,
+                    item.lessonName || '',
+                    item.integration || '',
+                    item.duration || ''
+                ]);
+
+                const ws = XLSX.utils.aoa_to_sheet([header, ...rows]);
+                ws['!cols'] = [{ wch: 8 }, { wch: 8 }, { wch: 18 }, { wch: 10 }, { wch: 10 }, { wch: 45 }, { wch: 45 }, { wch: 12 }];
+
+                const cleanSub = sub.replace(/[:\\/\?\*\[\]]/g, '').slice(0, 20);
+                let sheetName = (selectedGrade === "all") ? `${cleanSub}` : `K${selectedGrade}_${cleanSub}`;
+                sheetName = sheetName.slice(0, 31);
+
+                let finalSheetName = sheetName;
+                let counter = 1;
+                while (wb.SheetNames.includes(finalSheetName)) {
+                    finalSheetName = `${sheetName.slice(0, 28)}_${counter++}`;
+                }
+
+                XLSX.utils.book_append_sheet(wb, ws, finalSheetName);
+                totalSheets++;
+            }
+        });
+
+        if (totalSheets === 0) {
+            alert("Không có dữ liệu bài dạy nào để xuất Excel cho các môn đã chọn!");
+            return;
+        }
+
+        const gradeLabel = (selectedGrade === "all") ? "Khoi_1-5" : `Khoi_${selectedGrade}`;
+        const safeYear = (state.settings.academicYear || "2026-2027").replace(/\s+/g, '');
+        const filename = `PPCT_DaMon_${gradeLabel}_${totalSheets}Mon_${safeYear}.xlsx`;
+
+        XLSX.writeFile(wb, filename);
+        closeMultiExportKhdhModal();
+        showToast(`Đã xuất file Excel PPCT gộp (${totalSheets} Sheet môn): ${filename}`, "success");
+    }
+
+    // =========================================================================
     // PREVIEW & PRINT MODAL (DECREE 30/2020)
     // =========================================================================
     function openPreviewModal(title, contentHtml, onDownloadDocx, onDownloadXlsx, onPrint) {
@@ -1774,6 +2512,23 @@
             : calculateWeekScheduleForBm(weekNum, state.filterSubject, state.filterCampus, state.filterClass, state.lbgOptHideEmptyRows);
 
         const bghSigner = getBghSignerInfo("LBG");
+        const orderedCols = getLbgOrderedColumns(state.lbgCustomCols, state.lbgShowColSign, state.lbgShowColNote, isCtlop);
+
+        // Dynamic Table Header Columns
+        let theadColsHtml = "";
+        orderedCols.forEach(col => {
+            if (col.key === 'day') theadColsHtml += `<th style="width: 11%; border: 1px solid #000; padding: 5px; text-align: center;">Thứ, ngày</th>`;
+            else if (col.key === 'session') theadColsHtml += `<th style="width: 6%; border: 1px solid #000; padding: 5px; text-align: center;">Buổi</th>`;
+            else if (col.key === 'period') theadColsHtml += `<th style="width: 5%; border: 1px solid #000; padding: 5px; text-align: center;">Tiết</th>`;
+            else if (col.key === 'class') theadColsHtml += `<th style="width: 9%; border: 1px solid #000; padding: 5px; text-align: center; font-weight: bold;">Lớp</th>`;
+            else if (col.key === 'subject') theadColsHtml += `<th style="width: 13%; border: 1px solid #000; padding: 5px; text-align: center;">Môn học</th>`;
+            else if (col.key === 'ppct') theadColsHtml += `<th style="width: 8%; border: 1px solid #000; padding: 5px; text-align: center;">Tiết PPCT</th>`;
+            else if (col.key === 'lesson') theadColsHtml += `<th style="border: 1px solid #000; padding: 5px; text-align: center;">${isCtlop ? 'Tên bài dạy chi tiết' : 'Tên bài dạy'}</th>`;
+            else if (col.key === 'integ') theadColsHtml += `<th style="width: 22%; border: 1px solid #000; padding: 5px; text-align: center;">Nội dung tích hợp / Điều chỉnh</th>`;
+            else if (col.key === 'sign') theadColsHtml += `<th style="width: 7%; border: 1px solid #000; padding: 5px; text-align: center;">Kí tên</th>`;
+            else if (col.key === 'note') theadColsHtml += `<th style="width: 11%; border: 1px solid #000; padding: 5px; text-align: center;">Ghi chú</th>`;
+            else if (col.isCustom) theadColsHtml += `<th style="width: 10%; border: 1px solid #000; padding: 5px; text-align: center;">${escapeHtml(col.title)}</th>`;
+        });
 
         let tableRowsHtml = "";
         let i = 0;
@@ -1786,29 +2541,87 @@
 
             for (let k = i; k < j; k++) {
                 const row = schedule[k];
+                const rowKey = `w${weekNum}_s${row.slotIndex}`;
                 tableRowsHtml += "<tr>";
-                if (k === i) {
-                    tableRowsHtml += `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; border: 1px solid #000; padding: 4px;">${dateStr.replace('\n', '<br>')}</td>`;
-                }
-                tableRowsHtml += `<td style="text-align: center; vertical-align: middle; border: 1px solid #000; padding: 4px;">${row.session}</td>`;
-                tableRowsHtml += `<td style="text-align: center; vertical-align: middle; font-weight: 700; border: 1px solid #000; padding: 4px;">${row.period}</td>`;
 
-                if (row.isEmpty) {
-                    tableRowsHtml += `<td style="text-align: center; border: 1px solid #000; padding: 4px;">--</td>`;
-                    tableRowsHtml += `<td colspan="${isCtlop ? 4 : 3}" style="text-align: center; font-style: italic; border: 1px solid #000; padding: 4px;">-- Nghỉ / Để trống --</td>`;
-                } else {
-                    tableRowsHtml += `<td style="text-align: center; vertical-align: middle; font-weight: 800; border: 1px solid #000; padding: 4px;">${row.className}</td>`;
-                    tableRowsHtml += `<td style="border: 1px solid #000; padding: 4px; font-weight: 600;">${row.subject}</td>`;
-                    tableRowsHtml += `<td style="text-align: center; font-weight: 700; border: 1px solid #000; padding: 4px;">${row.ppct || ''}</td>`;
-                    tableRowsHtml += `<td style="border: 1px solid #000; padding: 4px;">${row.lessonName || ''}</td>`;
-                    if (isCtlop) {
-                        tableRowsHtml += `<td style="border: 1px solid #000; padding: 4px; font-size: 0.85em;">${(row.integration || '').replace(/\n/g, '<br>')}</td>`;
-                    }
+                let dayCellHtml = "";
+                if (k === i) {
+                    dayCellHtml = `<td rowspan="${daySpan}" style="text-align: center; vertical-align: middle; font-weight: 700; border: 1px solid #000; padding: 4px;">${dateStr.replace('\n', '<br>')}</td>`;
                 }
+
+                orderedCols.forEach(col => {
+                    if (col.key === 'day') {
+                        if (dayCellHtml) tableRowsHtml += dayCellHtml;
+                    } else if (col.key === 'session') {
+                        tableRowsHtml += `<td style="text-align: center; vertical-align: middle; border: 1px solid #000; padding: 4px;">${escapeHtml(row.session)}</td>`;
+                    } else if (col.key === 'period') {
+                        tableRowsHtml += `<td style="text-align: center; vertical-align: middle; font-weight: 700; border: 1px solid #000; padding: 4px;">${row.period}</td>`;
+                    } else if (col.key === 'class') {
+                        tableRowsHtml += `<td style="text-align: center; vertical-align: middle; font-weight: 800; border: 1px solid #000; padding: 4px;">${row.isEmpty ? '--' : escapeHtml(row.className)}</td>`;
+                    } else if (col.key === 'subject') {
+                        tableRowsHtml += `<td style="text-align: center; font-weight: 600; vertical-align: middle; border: 1px solid #000; padding: 4px;">${row.isEmpty ? '<span style="color:#94a3b8;font-style:italic;">-- Nghỉ --</span>' : escapeHtml(row.subject)}</td>`;
+                    } else if (col.key === 'ppct') {
+                        tableRowsHtml += `<td style="text-align: center; font-weight: 700; vertical-align: middle; border: 1px solid #000; padding: 4px;">${row.isEmpty ? '' : (row.ppct || '')}</td>`;
+                    } else if (col.key === 'lesson') {
+                        tableRowsHtml += `<td style="vertical-align: middle; border: 1px solid #000; padding: 4px;">${row.isEmpty ? '<span style="color:#94a3b8;font-style:italic;">-- Nghỉ / Để trống --</span>' : escapeHtml(row.lessonName || '')}</td>`;
+                    } else if (col.key === 'integ') {
+                        tableRowsHtml += `<td style="vertical-align: middle; border: 1px solid #000; padding: 4px; font-size: 0.85em;">${row.isEmpty ? '' : escapeHtml(row.integration || '').replace(/\n/g, '<br>')}</td>`;
+                    } else if (col.key === 'sign') {
+                        tableRowsHtml += `<td style="text-align: center; vertical-align: middle; border: 1px solid #000; padding: 4px;"></td>`;
+                    } else if (col.key === 'note') {
+                        const noteVal = (state.slotNotes && state.slotNotes[rowKey]) ? state.slotNotes[rowKey] : (row.note || '');
+                        tableRowsHtml += `<td style="vertical-align: middle; border: 1px solid #000; padding: 4px; font-size: 0.85em;">${escapeHtml(noteVal)}</td>`;
+                    } else if (col.isCustom) {
+                        const cVal = (state.slotCustomCols && state.slotCustomCols[rowKey] && state.slotCustomCols[rowKey][col.id]) ? state.slotCustomCols[rowKey][col.id] : '';
+                        tableRowsHtml += `<td style="vertical-align: middle; border: 1px solid #000; padding: 4px; font-size: 0.85em;">${escapeHtml(cVal)}</td>`;
+                    }
+                });
+
                 tableRowsHtml += "</tr>";
             }
             i = j;
         }
+
+        // Signatures columns
+        let sigTds = [];
+        if (state.lbgShowBghSign !== false) {
+            sigTds.push(`
+                <td style="text-align: center; vertical-align: top; border: none; padding: 0 10px;">
+                    <div style="font-weight: bold;">${bghSigner.docHeaderRole}</div>
+                    <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
+                    <div style="height: 55px;"></div>
+                    <div style="font-weight: bold;">${bghSigner.name}</div>
+                </td>
+            `);
+        }
+        if (state.lbgShowHeadSign !== false) {
+            sigTds.push(`
+                <td style="text-align: center; vertical-align: top; border: none; padding: 0 10px;">
+                    <div style="font-weight: bold;">TỔ TRƯỞNG CHUYÊN MÔN</div>
+                    <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
+                    <div style="height: 55px;"></div>
+                    <div style="font-weight: bold;">${escapeHtml(state.settings.headOfDepartment || '')}</div>
+                </td>
+            `);
+        }
+        if (state.lbgShowTeacherSign !== false) {
+            sigTds.push(`
+                <td style="text-align: center; vertical-align: top; border: none; padding: 0 10px;">
+                    <div style="font-weight: bold;">GIÁO VIÊN BỘ MÔN</div>
+                    <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
+                    <div style="height: 55px;"></div>
+                    <div style="font-weight: bold;">${escapeHtml(state.settings.teacherName || '')}</div>
+                </td>
+            `);
+        }
+
+        const sigColsHtml = sigTds.length > 0 ? `
+            <table style="width: 100%; border: none; margin-top: 25px;">
+                <tr>
+                    ${sigTds.join('')}
+                </tr>
+            </table>
+        ` : '';
 
         return `
             <div class="paper-page ${isLandscape ? 'landscape' : 'portrait'}" style="font-family: 'Times New Roman', serif; color: #000; line-height: 1.35; padding: 15mm 12mm; background: #fff; max-width: 900px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
@@ -1840,14 +2653,7 @@
                 <table style="width: 100%; border-collapse: collapse; font-size: 13pt; margin-bottom: 20px;">
                     <thead>
                         <tr style="background: #e2e8f0;">
-                            <th style="width: 13%; border: 1px solid #000; padding: 5px; text-align: center;">Thứ, ngày</th>
-                            <th style="width: 8%; border: 1px solid #000; padding: 5px; text-align: center;">Buổi</th>
-                            <th style="width: 6%; border: 1px solid #000; padding: 5px; text-align: center;">Tiết</th>
-                            <th style="width: 10%; border: 1px solid #000; padding: 5px; text-align: center; font-weight: bold;">Lớp</th>
-                            <th style="width: 18%; border: 1px solid #000; padding: 5px; text-align: center;">Môn học</th>
-                            <th style="width: 9%; border: 1px solid #000; padding: 5px; text-align: center;">Tiết PPCT</th>
-                            <th style="border: 1px solid #000; padding: 5px; text-align: center;">${isCtlop ? 'Tên bài dạy chi tiết' : 'Tên bài dạy'}</th>
-                            ${isCtlop ? '<th style="width: 25%; border: 1px solid #000; padding: 5px; text-align: center;">Nội dung tích hợp / Điều chỉnh</th>' : ''}
+                            ${theadColsHtml}
                         </tr>
                     </thead>
                     <tbody>
@@ -1856,28 +2662,7 @@
                 </table>
 
                 <!-- Signatures -->
-                <table style="width: 100%; border: none; margin-top: 25px;">
-                    <tr>
-                        <td style="width: 33%; text-align: center; vertical-align: top; border: none;">
-                            <div style="font-weight: bold;">${bghSigner.docHeaderRole}</div>
-                            <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
-                            <div style="height: 55px;"></div>
-                            <div style="font-weight: bold;">${bghSigner.name}</div>
-                        </td>
-                        <td style="width: 34%; text-align: center; vertical-align: top; border: none;">
-                            <div style="font-weight: bold;">TỔ TRƯỞNG CHUYÊN MÔN</div>
-                            <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
-                            <div style="height: 55px;"></div>
-                            <div style="font-weight: bold;">${escapeHtml(state.settings.headOfDepartment || '')}</div>
-                        </td>
-                        <td style="width: 33%; text-align: center; vertical-align: top; border: none;">
-                            <div style="font-weight: bold;">GIÁO VIÊN BỘ MÔN</div>
-                            <div style="font-style: italic; font-size: 11pt;">(Ký và ghi rõ họ tên)</div>
-                            <div style="height: 55px;"></div>
-                            <div style="font-weight: bold;">${escapeHtml(state.settings.teacherName || '')}</div>
-                        </td>
-                    </tr>
-                </table>
+                ${sigColsHtml}
             </div>
         `;
     }
@@ -1980,6 +2765,7 @@
         saveState();
         renderAssignedSubjectsSection();
         renderMasterTimetableDetailed();
+        updatePpctSubjectDropdown();
     };
 
     window.removeAssignedSubject = function(idx) {
@@ -1988,6 +2774,7 @@
         saveState();
         renderAssignedSubjectsSection();
         renderMasterTimetableDetailed();
+        updatePpctSubjectDropdown();
         showToast(`Đã bỏ môn ${sub}`, "info");
     };
 
@@ -2172,6 +2959,83 @@
         const btnCtlopDocxDirect = document.getElementById("btn-ctlop-docx-direct");
         if (btnCtlopDocxDirect) btnCtlopDocxDirect.onclick = () => exportCtlopDocxCurrent();
 
+        // Tab 1 & Tab 2 Synchronized Column and Signature Toggles
+        const chkLbgColSign = document.getElementById("lbg-opt-col-sign");
+        const chkCtlopColSign = document.getElementById("ctlop-opt-col-sign");
+        function syncColSign(val) {
+            state.lbgShowColSign = val;
+            if (chkLbgColSign) chkLbgColSign.checked = val;
+            if (chkCtlopColSign) chkCtlopColSign.checked = val;
+            saveState();
+            renderTabLbgTableOnly();
+            renderTabCtlopTableOnly();
+        }
+        if (chkLbgColSign) chkLbgColSign.onchange = (e) => syncColSign(e.target.checked);
+        if (chkCtlopColSign) chkCtlopColSign.onchange = (e) => syncColSign(e.target.checked);
+
+        const chkLbgColNote = document.getElementById("lbg-opt-col-note");
+        const chkCtlopColNote = document.getElementById("ctlop-opt-col-note");
+        function syncColNote(val) {
+            state.lbgShowColNote = val;
+            if (chkLbgColNote) chkLbgColNote.checked = val;
+            if (chkCtlopColNote) chkCtlopColNote.checked = val;
+            saveState();
+            renderTabLbgTableOnly();
+            renderTabCtlopTableOnly();
+        }
+        if (chkLbgColNote) chkLbgColNote.onchange = (e) => syncColNote(e.target.checked);
+        if (chkCtlopColNote) chkCtlopColNote.onchange = (e) => syncColNote(e.target.checked);
+
+        const btnLbgAddCol = document.getElementById("btn-lbg-add-custom-col");
+        if (btnLbgAddCol) btnLbgAddCol.onclick = handleAddNewCustomCol;
+        const btnCtlopAddCol = document.getElementById("btn-ctlop-add-custom-col");
+        if (btnCtlopAddCol) btnCtlopAddCol.onclick = handleAddNewCustomCol;
+
+        const chkLbgSigBgh = document.getElementById("lbg-opt-sig-bgh");
+        const chkCtlopSigBgh = document.getElementById("ctlop-opt-sig-bgh");
+        function syncSigBgh(val) {
+            state.lbgShowBghSign = val;
+            if (chkLbgSigBgh) chkLbgSigBgh.checked = val;
+            if (chkCtlopSigBgh) chkCtlopSigBgh.checked = val;
+            const b1 = document.getElementById("lbg-sig-box-bgh");
+            if (b1) b1.style.display = val ? "" : "none";
+            const b2 = document.getElementById("ctlop-sig-box-bgh");
+            if (b2) b2.style.display = val ? "" : "none";
+            saveState();
+        }
+        if (chkLbgSigBgh) chkLbgSigBgh.onchange = (e) => syncSigBgh(e.target.checked);
+        if (chkCtlopSigBgh) chkCtlopSigBgh.onchange = (e) => syncSigBgh(e.target.checked);
+
+        const chkLbgSigHead = document.getElementById("lbg-opt-sig-head");
+        const chkCtlopSigHead = document.getElementById("ctlop-opt-sig-head");
+        function syncSigHead(val) {
+            state.lbgShowHeadSign = val;
+            if (chkLbgSigHead) chkLbgSigHead.checked = val;
+            if (chkCtlopSigHead) chkCtlopSigHead.checked = val;
+            const h1 = document.getElementById("lbg-sig-box-head");
+            if (h1) h1.style.display = val ? "" : "none";
+            const h2 = document.getElementById("ctlop-sig-box-head");
+            if (h2) h2.style.display = val ? "" : "none";
+            saveState();
+        }
+        if (chkLbgSigHead) chkLbgSigHead.onchange = (e) => syncSigHead(e.target.checked);
+        if (chkCtlopSigHead) chkCtlopSigHead.onchange = (e) => syncSigHead(e.target.checked);
+
+        const chkLbgSigTeacher = document.getElementById("lbg-opt-sig-teacher");
+        const chkCtlopSigTeacher = document.getElementById("ctlop-opt-sig-teacher");
+        function syncSigTeacher(val) {
+            state.lbgShowTeacherSign = val;
+            if (chkLbgSigTeacher) chkLbgSigTeacher.checked = val;
+            if (chkCtlopSigTeacher) chkCtlopSigTeacher.checked = val;
+            const t1 = document.getElementById("lbg-sig-box-teacher");
+            if (t1) t1.style.display = val ? "" : "none";
+            const t2 = document.getElementById("ctlop-sig-box-teacher");
+            if (t2) t2.style.display = val ? "" : "none";
+            saveState();
+        }
+        if (chkLbgSigTeacher) chkLbgSigTeacher.onchange = (e) => syncSigTeacher(e.target.checked);
+        if (chkCtlopSigTeacher) chkCtlopSigTeacher.onchange = (e) => syncSigTeacher(e.target.checked);
+
         // Tab 3 Actions
         const btnLbgMonPreview = document.getElementById("btn-lbgmon-preview");
         if (btnLbgMonPreview) {
@@ -2214,6 +3078,61 @@
                 } else {
                     showToast("Không tìm thấy bộ tạo Word KHDH", "error");
                 }
+            };
+        }
+
+        // Tab 4 Multi-Export Modal & Filter
+        const btnOpenMultiExport = document.getElementById("btn-open-multi-export-khdh");
+        if (btnOpenMultiExport) btnOpenMultiExport.onclick = openMultiExportKhdhModal;
+
+        const btnMultiClose = document.getElementById("modal-khdh-multi-close-btn");
+        if (btnMultiClose) btnMultiClose.onclick = closeMultiExportKhdhModal;
+
+        const btnMultiCancel = document.getElementById("modal-khdh-multi-cancel-btn");
+        if (btnMultiCancel) btnMultiCancel.onclick = closeMultiExportKhdhModal;
+
+        const multiGradeSelect = document.getElementById("multi-export-grade-select");
+        if (multiGradeSelect) multiGradeSelect.onchange = renderMultiExportSubjectsList;
+
+        const btnMultiSelectAll = document.getElementById("btn-multi-export-select-all");
+        if (btnMultiSelectAll) {
+            btnMultiSelectAll.onclick = () => {
+                document.querySelectorAll(".multi-export-subject-item").forEach(cb => cb.checked = true);
+            };
+        }
+
+        const btnMultiDeselectAll = document.getElementById("btn-multi-export-deselect-all");
+        if (btnMultiDeselectAll) {
+            btnMultiDeselectAll.onclick = () => {
+                document.querySelectorAll(".multi-export-subject-item").forEach(cb => cb.checked = false);
+            };
+        }
+
+        const btnDoMultiDocx = document.getElementById("btn-do-multi-export-docx");
+        if (btnDoMultiDocx) btnDoMultiDocx.onclick = doMultiExportDocx;
+
+        const btnDoMultiExcel = document.getElementById("btn-do-multi-export-excel");
+        if (btnDoMultiExcel) btnDoMultiExcel.onclick = doMultiExportExcel;
+
+        const chkPpctFilterAssigned = document.getElementById("ppct-filter-only-assigned");
+        if (chkPpctFilterAssigned) {
+            chkPpctFilterAssigned.checked = (state.ppctFilterOnlyAssigned !== false);
+            chkPpctFilterAssigned.onchange = (e) => {
+                state.ppctFilterOnlyAssigned = e.target.checked;
+                saveState();
+                updatePpctSubjectDropdown();
+                renderTabPpctTableOnly();
+            };
+        }
+
+        const btnPpctManageSubs = document.getElementById("btn-ppct-manage-subjects");
+        if (btnPpctManageSubs) {
+            btnPpctManageSubs.onclick = () => {
+                switchActiveTab("tab-settings");
+                setTimeout(() => {
+                    const el = document.getElementById("assigned-subjects-tags-container");
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
             };
         }
 
@@ -2327,6 +3246,40 @@
                 }
             };
         }
+
+        // Quick Subject Actions & Memory Optimization
+        const btnUncheckAllSubs = document.getElementById("btn-uncheck-all-subjects");
+        if (btnUncheckAllSubs) {
+            btnUncheckAllSubs.onclick = () => {
+                if (!confirm("Bỏ chọn tất cả các môn giảng dạy hiện tại? Thầy/Cô có thể tick chọn lại môn mình dạy ngay sau đó.")) return;
+                state.assignedSubjects = [];
+                saveState();
+                renderAssignedSubjectsSection();
+                renderMasterTimetableDetailed();
+                updatePpctSubjectDropdown();
+                renderTabPpctTableOnly();
+                showToast("Đã bỏ chọn tất cả môn!", "info");
+            };
+        }
+
+        const btnResetDefSubs = document.getElementById("btn-reset-default-subjects");
+        if (btnResetDefSubs) {
+            btnResetDefSubs.onclick = () => {
+                state.assignedSubjects = ["Tin học", "Công nghệ"];
+                saveState();
+                renderAssignedSubjectsSection();
+                renderMasterTimetableDetailed();
+                updatePpctSubjectDropdown();
+                renderTabPpctTableOnly();
+                showToast("Đã đặt lại môn giảng dạy mẫu: Tin học & Công nghệ!", "success");
+            };
+        }
+
+        const btnPurgePpct = document.getElementById("btn-purge-unassigned-ppct");
+        if (btnPurgePpct) btnPurgePpct.onclick = purgeUnassignedSubjectsData;
+
+        const btnRestorePpct = document.getElementById("btn-restore-all-ppct");
+        if (btnRestorePpct) btnRestorePpct.onclick = restoreAllSubjectsData;
 
         const btnResetClasses = document.getElementById("btn-reset-default-classes");
         if (btnResetClasses) {

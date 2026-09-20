@@ -212,7 +212,7 @@
                                 <th style="width: 60px;">Buổi</th>
                                 <th style="width: 45px;">Tiết</th>
                                 <th style="width: 80px; text-align: center; background: #e0e7ff; color: #312e81; font-weight: 800;">Lớp</th>
-                                <th style="width: 160px;">Môn học</th>
+                                <th style="width: 110px; text-align: center;">Môn học</th>
                                 <th style="width: 75px;">Tiết PPCT</th>
                                 <th>Tên bài dạy chi tiết (Nhấp đúp vào ô để sửa trực tiếp)</th>
                                 <th style="width: 75px;" class="no-print">Thao tác</th>
@@ -320,6 +320,35 @@
                             </label>
                         </div>
                     </div>
+
+                    <!-- Column Toggles & Signatures for Tab 2 -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #bfdbfe; font-size: 0.84rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <span style="font-weight: 700; color: #1e3a8a;">📋 Cột bổ sung:</span>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-weight: 600; cursor: pointer;">
+                                <input type="checkbox" id="ctlop-opt-col-sign"> <span>✍️ Cột Kí tên</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-weight: 600; cursor: pointer;">
+                                <input type="checkbox" id="ctlop-opt-col-note" checked> <span>📝 Cột Ghi chú</span>
+                            </label>
+                            <div id="ctlop-custom-cols-list" style="display: inline-flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;"></div>
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-ctlop-add-custom-col" style="font-size: 0.78rem; padding: 0.18rem 0.5rem; font-weight: 700; color: var(--primary); border: 1px dashed var(--primary); background: #fff;">
+                                <span>➕ Thêm cột</span>
+                            </button>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                            <span style="font-weight: 700; color: #b45309;">🏛️ Chữ ký in:</span>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-weight: 600; cursor: pointer;">
+                                <input type="checkbox" id="ctlop-opt-sig-bgh" checked> <span>Ký BGH</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-weight: 600; cursor: pointer;">
+                                <input type="checkbox" id="ctlop-opt-sig-head" checked> <span>Tổ trưởng CM</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-weight: 600; cursor: pointer;">
+                                <input type="checkbox" id="ctlop-opt-sig-teacher" checked> <span>Ký GVBM</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div style="text-align: center; margin: 1.25rem 0 1rem 0;">
@@ -338,7 +367,7 @@
                                 <th style="width: 60px;">Buổi</th>
                                 <th style="width: 45px;">Tiết</th>
                                 <th style="width: 80px; text-align: center; background: #e0e7ff; color: #312e81; font-weight: 800;">Lớp</th>
-                                <th style="width: 160px;">Môn học</th>
+                                <th style="width: 110px; text-align: center;">Môn học</th>
                                 <th style="width: 75px;">Tiết PPCT</th>
                                 <th style="min-width: 240px;">Tên bài dạy chi tiết</th>
                                 <th style="min-width: 220px;">Nội dung tích hợp / Điều chỉnh</th>
@@ -500,6 +529,9 @@
                         <button class="btn btn-accent" id="btn-export-ppct-excel">
                             <span>📊</span> <span>Xuất Excel PPCT</span>
                         </button>
+                        <button class="btn btn-primary" id="btn-open-multi-export-khdh" style="background: #1e3a8a; font-weight: 700;">
+                            <span>📦</span> <span>Xuất KHDH &amp; PPCT Nhiều Môn</span>
+                        </button>
                     </div>
                 </div>
 
@@ -516,11 +548,18 @@
                         </select>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                         <label for="ppct-subject-select" style="font-weight: 700; color: var(--text-main); font-size: 0.92rem; margin: 0;">📚 Chọn Môn Học:</label>
-                        <select id="ppct-subject-select" class="form-select" style="font-weight: 700; min-width: 180px;">
+                        <select id="ppct-subject-select" class="form-select" style="font-weight: 700; min-width: 170px;">
                             <!-- Populated dynamically -->
                         </select>
+                        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 600; color: var(--primary); cursor: pointer; margin: 0 0.25rem;">
+                            <input type="checkbox" id="ppct-filter-only-assigned" checked style="width: 16px; height: 16px; accent-color: var(--primary);">
+                            <span>Chỉ hiện môn tôi phụ trách</span>
+                        </label>
+                        <button type="button" class="btn btn-secondary btn-sm" id="btn-ppct-manage-subjects" style="font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; color: #1e40af; border-color: #93c5fd;" title="Chuyển đến cài đặt để thêm, bớt hoặc dọn dẹp dữ liệu môn không dạy">
+                            <span>⚙️ Quản lý môn dạy</span>
+                        </button>
                     </div>
 
                     <div style="margin-left: auto; display: flex; gap: 0.5rem; flex-wrap: wrap;">
@@ -755,6 +794,20 @@
                     </div>
 
                     <!-- Selected Subjects Tags -->
+                    <div style="margin-bottom: 0.85rem; padding: 0.65rem 0.95rem; background: #fffbeb; border: 1px solid #fef3c7; border-radius: var(--radius-sm); font-size: 0.85rem; color: #92400e; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <span>💡 <strong>Hướng dẫn loại bỏ môn không dạy:</strong> Thầy/Cô bấm dấu <strong style="color: #b91c1c;">✕</strong> trên thẻ môn bên dưới, hoặc <strong>bỏ dấu tick</strong> ở danh sách môn.</span>
+                        </div>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-uncheck-all-subjects" style="font-size: 0.78rem; padding: 0.2rem 0.5rem; color: #b91c1c; font-weight: 700;">
+                                <span>🚫 Bỏ chọn tất cả môn</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-default-subjects" style="font-size: 0.78rem; padding: 0.2rem 0.5rem; font-weight: 600;">
+                                <span>🔄 Môn mẫu (Tin học &amp; Công nghệ)</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div style="margin-bottom: 1rem; padding: 0.85rem 1rem; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-sm);">
                         <div style="font-size: 0.85rem; font-weight: 700; color: #1e40af; margin-bottom: 0.5rem;">
                             🎯 Các môn Thầy/Cô đang phụ trách giảng dạy:
@@ -767,6 +820,26 @@
                     <!-- Quick Pick Subject Checkboxes -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.65rem;" id="available-subjects-selector-grid">
                         <!-- Populated dynamically with checkboxes -->
+                    </div>
+
+                    <!-- Data Purge / Optimization Toolbar -->
+                    <div style="margin-top: 1.25rem; padding: 0.85rem 1rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                        <div>
+                            <div style="font-size: 0.9rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.4rem;">
+                                <span>⚡</span> <span>Tối ưu hóa bộ nhớ &amp; Giải phóng dung lượng lưu trữ:</span>
+                            </div>
+                            <div style="font-size: 0.82rem; color: #64748b; margin-top: 0.2rem;">
+                                Xóa dữ liệu các môn Thầy/Cô không dạy để máy chạy mượt hơn, giảm 90% dung lượng lưu trữ. Có thể khôi phục lại bất cứ lúc nào từ kho gốc.
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button type="button" class="btn btn-danger btn-sm" id="btn-purge-unassigned-ppct" style="background: #dc2626; color: #fff; font-weight: 700; border: none; padding: 0.35rem 0.85rem;" title="Xóa dữ liệu bài dạy của các môn không nằm trong danh sách phân công phía trên">
+                                <span>🗑️ Xóa Dữ Liệu Môn Không Dạy</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-restore-all-ppct" style="color: #047857; font-weight: 700; border-color: #10b981; background: #fff;" title="Nạp lại toàn bộ dữ liệu 15 môn từ kho mẫu gốc của phần mềm">
+                                <span>🔄 Khôi Phục Kho Môn Gốc</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -1328,6 +1401,61 @@
                 <button class="btn btn-primary" id="modal-campus-save-btn">
                     <span>💾</span> <span>Lưu Tên Phân Hiệu</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         MODAL XUẤT KẾ HOẠCH DẠY HỌC (KHDH) & PPCT ĐA MÔN
+         ========================================================================= -->
+    <div class="modal-backdrop" id="modal-khdh-multi-export" style="display: none; z-index: 1060;">
+        <div class="modal-card" style="max-width: 600px;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white;">
+                <h3 class="modal-title" style="color: white; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
+                    <span>📦</span> <span>Xuất KHDH &amp; PPCT Nhiều Môn Cùng Lúc</span>
+                </h3>
+                <button class="btn btn-secondary btn-sm" id="modal-khdh-multi-close-btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-weight: bold;">✕ Đóng</button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <p style="font-size: 0.88rem; color: #475569; margin-top: 0; margin-bottom: 1rem; line-height: 1.45;">
+                    Hệ thống sẽ tổng hợp tất cả các môn Thầy/Cô đã chọn thành <strong>1 file Word KHDH duy nhất</strong> (gồm Phần 1, Phần 2... theo thể thức chuẩn Nghị định 30/2020/NĐ-CP) hoặc <strong>1 file Excel PPCT nhiều Sheet</strong> (mỗi môn 1 sheet riêng biệt).
+                </p>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-weight: 700; color: var(--primary);">1. Chọn Khối Lớp Muốn Xuất:</label>
+                    <select class="form-select" id="multi-export-grade-select" style="font-weight: 700; color: #1e40af;">
+                        <option value="1">Khối 1</option>
+                        <option value="2">Khối 2</option>
+                        <option value="3">Khối 3</option>
+                        <option value="4">Khối 4</option>
+                        <option value="5" selected>Khối 5</option>
+                        <option value="all">Tất cả các khối phụ trách (Khối 1 - 5)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <label class="form-label" style="font-weight: 700; color: var(--primary); margin: 0;">2. Chọn Các Môn Giảng Dạy:</label>
+                        <div style="display: flex; gap: 0.35rem;">
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-multi-export-select-all" style="font-size: 0.78rem; padding: 0.15rem 0.45rem;">Chọn tất cả</button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-multi-export-deselect-all" style="font-size: 0.78rem; padding: 0.15rem 0.45rem;">Bỏ chọn</button>
+                        </div>
+                    </div>
+                    <div id="multi-export-subjects-checklist" style="max-height: 220px; overflow-y: auto; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); padding: 0.75rem; background: #f8fafc; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <!-- Populated dynamically with checkboxes -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                <button class="btn btn-secondary" id="modal-khdh-multi-cancel-btn">Hủy bỏ</button>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-accent" id="btn-do-multi-export-excel">
+                        <span>📊</span> <span>Tải Excel PPCT Gộp (.xlsx)</span>
+                    </button>
+                    <button class="btn btn-primary" id="btn-do-multi-export-docx" style="background: #1e3a8a;">
+                        <span>📄</span> <span>Tải Word KHDH Gộp (.docx)</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
