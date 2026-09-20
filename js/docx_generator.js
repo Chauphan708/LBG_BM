@@ -131,17 +131,19 @@ window.DocxGenerator = (function() {
         i = 0;
         while (i < n) {
             let j = i + 1;
+            const lesson_i = (rows[i].lesson || rows[i].lessonName || '').trim();
             if (cat === 'tieng_viet' || cat === 'hdtn') {
-                while (j < n && rows[j].week === rows[i].week && !(rows[j].lesson && rows[j].lesson.trim())) {
+                while (j < n && rows[j].week === rows[i].week && !((rows[j].lesson || rows[j].lessonName || '').trim())) {
                     j++;
                 }
             } else {
                 const durMatch = (rows[i].duration || '').match(/(\d+)\s*tiết/i);
                 const expectedCount = durMatch ? parseInt(durMatch[1], 10) : 1;
-                const base_i = getBaseLesson(rows[i].lesson);
+                const base_i = getBaseLesson(lesson_i);
 
                 while (j < n && rows[j].week === rows[i].week && (j - i < expectedCount)) {
-                    const base_j = getBaseLesson(rows[j].lesson);
+                    const lesson_j = (rows[j].lesson || rows[j].lessonName || '').trim();
+                    const base_j = getBaseLesson(lesson_j);
                     if (base_j === base_i || !(rows[j].duration && rows[j].duration.trim())) {
                         j++;
                     } else {
@@ -504,7 +506,7 @@ window.DocxGenerator = (function() {
                 sub.rows.forEach((r, rIdx) => {
                     const integXml = formatIntegrationXml(r.integration);
                     const contentXml = formatContentXml(r.content);
-                    const lessonText = r.lesson || '';
+                    const lessonText = r.lesson || r.lessonName || '';
                     const topicText = r.topic || r.theme || '';
 
                     // Cột 1: Tuần (Gộp ô vMerge)
@@ -607,10 +609,11 @@ window.DocxGenerator = (function() {
 
                 sub.rows.forEach((r, rIdx) => {
                     const integXml = formatIntegrationXml(r.integration);
-                    const lessonText = (spans.lesson[rIdx] > 1) ? (getBaseLesson(r.lesson) || r.lesson) : (r.lesson || '');
+                    const rawLesson = r.lesson || r.lessonName || '';
+                    const lessonText = (spans.lesson[rIdx] > 1) ? (getBaseLesson(rawLesson) || rawLesson) : rawLesson;
                     const topicText = r.topic || r.theme || '';
                     const durText = r.duration || (spans.duration[rIdx] > 0 ? (spans.duration[rIdx] + ' tiết') : '');
-                    const khmhPeriodText = r.khmhPeriod || r.content || (rIdx + 1).toString();
+                    const khmhPeriodText = r.khmhPeriod || r.ppct || r.content || (rIdx + 1).toString();
 
                     // Cột 1: Tuần (Gộp ô vMerge)
                     let weekCellXml = (spans.week[rIdx] > 0)
