@@ -3037,33 +3037,61 @@
 
         if (docType === 'lbg-mon' && genSubFn) {
             showToast(`Đang tạo file Word theo môn từ Tuần ${startWeek} đến Tuần ${endWeek}...`, "info");
-            const scheduleFn = (w) => calculateWeekScheduleBySubjectForBm(w, state.lbgMonFilterSubject, state.lbgMonOptHideEmptyRows);
-            genSubFn(startWeek, endWeek, scheduleFn, state.settings, batchOrient, state.lbgMonShowIntegration !== false, state.lbgMonFilterSubject, "all").then(blob => {
-                const filename = `Lich_Bao_Giang_Theo_Mon_Tuan_${startWeek}_den_${endWeek}.docx`;
-                saveAs(blob, filename);
-                showToast(`Đã xuất file Word thành công: ${filename}`, "success");
-            }).catch(err => {
-                console.error("Batch Word export error:", err);
+            const scheduleFn = (w) => {
+                const wInfo = (state.weeks && state.weeks.find(x => x.week === w)) || { startDateVN: '', endDateVN: '' };
+                const grps = calculateWeekScheduleBySubjectForBm(w, state.lbgMonFilterSubject, state.lbgMonOptHideEmptyRows);
+                return {
+                    weekNum: w,
+                    weekInfo: wInfo,
+                    groups: grps,
+                    subjectGroups: grps.map(g => ({ subjectName: g.subject, slots: g.rows }))
+                };
+            };
+            try {
+                genSubFn(startWeek, endWeek, scheduleFn, state.settings, batchOrient, state.lbgMonShowIntegration !== false, state.lbgMonFilterSubject, "all").then(blob => {
+                    const filename = `Lich_Bao_Giang_Theo_Mon_Tuan_${startWeek}_den_${endWeek}.docx`;
+                    saveAs(blob, filename);
+                    showToast(`Đã xuất file Word thành công: ${filename}`, "success");
+                }).catch(err => {
+                    console.error("Batch Word export error:", err);
+                    alert("Lỗi xuất file Word: " + err.message);
+                });
+            } catch (err) {
+                console.error("Batch Word export sync error:", err);
                 alert("Lỗi xuất file Word: " + err.message);
-            });
+            }
         } else if (genMultiFn) {
             showToast(`Đang tạo file Word từ Tuần ${startWeek} đến Tuần ${endWeek}...`, "info");
-            const scheduleFn = (w) => calculateWeekScheduleForBm(
-                w,
-                isCtlop ? state.ctlopFilterSubject : state.filterSubject,
-                state.filterCampus,
-                isCtlop ? state.ctlopFilterClass : state.filterClass,
-                isCtlop ? state.ctlopOptHideEmptyRows : state.lbgOptHideEmptyRows
-            );
-            genMultiFn(isCtlop, startWeek, endWeek, scheduleFn, state.settings, batchOrient, options).then(blob => {
-                const prefix = isCtlop ? "Lich_Bao_Giang_Tich_Hop" : "Lich_Bao_Giang";
-                const filename = `${prefix}_Tuan_${startWeek}_den_${endWeek}_GVBM.docx`;
-                saveAs(blob, filename);
-                showToast(`Đã xuất file Word thành công: ${filename}`, "success");
-            }).catch(err => {
-                console.error("Batch Word export error:", err);
+            const scheduleFn = (w) => {
+                const wInfo = (state.weeks && state.weeks.find(x => x.week === w)) || { startDateVN: '', endDateVN: '' };
+                const sched = calculateWeekScheduleForBm(
+                    w,
+                    isCtlop ? state.ctlopFilterSubject : state.filterSubject,
+                    state.filterCampus,
+                    isCtlop ? state.ctlopFilterClass : state.filterClass,
+                    isCtlop ? state.ctlopOptHideEmptyRows : state.lbgOptHideEmptyRows
+                );
+                return {
+                    weekNum: w,
+                    weekInfo: wInfo,
+                    schedule: sched,
+                    stats: {}
+                };
+            };
+            try {
+                genMultiFn(isCtlop, startWeek, endWeek, scheduleFn, state.settings, batchOrient, options).then(blob => {
+                    const prefix = isCtlop ? "Lich_Bao_Giang_Tich_Hop" : "Lich_Bao_Giang";
+                    const filename = `${prefix}_Tuan_${startWeek}_den_${endWeek}_GVBM.docx`;
+                    saveAs(blob, filename);
+                    showToast(`Đã xuất file Word thành công: ${filename}`, "success");
+                }).catch(err => {
+                    console.error("Batch Word export error:", err);
+                    alert("Lỗi xuất file Word: " + err.message);
+                });
+            } catch (err) {
+                console.error("Batch Word export sync error:", err);
                 alert("Lỗi xuất file Word: " + err.message);
-            });
+            }
         } else {
             alert("Bộ tạo file Word chưa sẵn sàng!");
         }
