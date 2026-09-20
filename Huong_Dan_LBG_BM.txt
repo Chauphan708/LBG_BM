@@ -1,0 +1,69 @@
+========================================================================================
+       HƯỚNG DẪN SỬ DỤNG PHẦN MỀM LỊCH BÁO GIẢNG GIÁO VIÊN BỘ MÔN (LBG_BM)
+                 DÀNH CHO GIÁO VIÊN BỘ MÔN TIỂU HỌC (KHỐI 1 - 5)
+   Bộ sách: Kết Nối Tri Thức Với Cuộc Sống & Đầy đủ các môn GDPT 2018 (Năm học 2026 - 2027)
+========================================================================================
+
+Kính gửi Quý Thầy/Cô Giáo viên Bộ Môn!
+
+Phiên bản LBG_BM là giải pháp chuyên biệt được xây dựng riêng cho Giáo viên bộ môn (như Tin học, Công nghệ, GD Thể chất, Âm nhạc, Mĩ thuật, Tiếng Anh, KNS, STEM...) – những thầy/cô giảng dạy một hoặc nhiều môn trên nhiều lớp và trải dài qua nhiều điểm trường/phân hiệu khác nhau.
+
+Phần mềm chạy hoàn toàn CỤC BỘ (Offline 100%), không cần mạng Internet, dữ liệu lưu an toàn trên máy tính của Thầy/Cô.
+
+----------------------------------------------------------------------------------------
+⭐ QUY TRÌNH 4 BƯỚC THIẾT THỰC ĐỂ BẮT ĐẦU SỬ DỤNG PHẦN MỀM HIỆU QUẢ:
+----------------------------------------------------------------------------------------
+
+BƯỚC 1: CÀI ĐẶT THÔNG TIN, MÔN DẠY, PHÂN HIỆU, LỚP VÀ XẾP TKB CÁ NHÂN (Làm 1 lần đầu năm)
+- Vào Tab "⚙️ Cài Đặt & TKB":
+  1. Mục 1: Điền họ tên Giáo viên bộ môn, tên Tổ Chuyên Môn (ví dụ: Tổ Bộ Môn, Tổ Tin học - Ngoại ngữ...), tên trường tiểu học, năm học và chọn người ký duyệt BGH.
+  2. Mục 2: Tick chọn các Môn học Thầy/Cô trực tiếp đảm nhận trong năm học (Thầy/Cô có thể dạy 1 môn, 2 môn, 3 môn hoặc 4 môn như Tin học + Công nghệ + GD Thể chất + Âm nhạc). Có thể tự gõ thêm môn mới nếu cần.
+  3. Mục 3: Kiểm tra danh sách 5 Phân hiệu (Trường chính Điểm A, Phân hiệu 1 Điểm B, Điểm C, Điểm D, Điểm E) và 75 lớp học chuẩn (15 lớp mỗi khối). Thầy/Cô có thể đổi tên phân hiệu, Thêm lớp mới, Sửa tên lớp hoặc Xóa lớp. Đánh dấu tick chọn các lớp mình trực tiếp giảng dạy.
+  4. Mục 4: Kéo xuống Thời Khóa Biểu cá nhân: với mỗi tiết học trong tuần, chọn [Lớp giảng dạy] và [Môn học]. Sau đó bấm nút "💾 Lưu TKB Cá Nhân".
+
+BƯỚC 2: TỰ ĐỘNG TẠO LỊCH 35 TUẦN NĂM HỌC (Làm 1 lần đầu năm)
+- Vào Tab "🗓️ Lịch 35 Tuần":
+  1. Kiểm tra ngày bắt đầu Tuần 1 (ngày Thứ Hai đầu tiên vào học, ví dụ 07/09/2026).
+  2. Điền khoảng thời gian nghỉ Tết Âm lịch của địa phương.
+  3. Bấm nút "⚡ Tự Động Tạo Lịch 35 Tuần". Phần mềm sẽ tính toán chính xác ngày tháng bắt đầu và kết thúc cho toàn bộ 35 tuần năm học.
+
+BƯỚC 3: KIỂM TRA PHÂN PHỐI CHƯƠNG TRÌNH & XUẤT KHDH (Đầu năm hoặc khi cần)
+- Vào Tab "📖 PPCT & KHDH Các Khối":
+  1. Chọn Khối lớp (Khối 1, 2, 3, 4, 5) và Môn học để xem toàn bộ danh mục bài dạy cả năm.
+  2. Kiểm tra kho bài dạy đã nạp sẵn. Chỉnh sửa, thêm bớt cho phù hợp với thực tế của trường mình bằng cách nhấp đúp vào ô để sửa.
+  3. ⚠️ LƯU Ý QUAN TRỌNG: PHẢI XEM THẬT KĨ VỀ PHÂN PHỐI CHƯƠNG TRÌNH, ĐIỀU CHỈNH, BỔ SUNG CHO PHÙ HỢP TRƯỚC KHI SỬ DỤNG.
+  4. Bấm "📊 Xuất Excel PPCT" để tải bảng PPCT cả năm (kèm cột tích hợp NLS, BVMT, AI...) hoặc bấm "📄 Tải File Word KHDH" để nộp Ban Giám Hiệu duyệt.
+
+BƯỚC 4: SỬ DỤNG LỊCH BÁO GIẢNG HÀNG TUẦN
+- Đầu mỗi tuần dạy:
+  1. Vào Tab "📅 LBG Tuần (Tổng Hợp)": Chọn tuần cần báo giảng (Tuần 1 đến 35). Phần mềm tự động ghép nối bài dạy PPCT tương ứng với từng Lớp và từng Môn theo đúng TKB cá nhân.
+  2. Thầy/Cô có thể dùng bộ lọc nhanh:
+     - Lọc xem riêng từng Môn dạy.
+     - Lọc xem riêng từng Phân hiệu (Điểm A, Điểm B, Điểm C, Điểm D, Điểm E).
+     - Lọc xem riêng từng Lớp học.
+  3. Chuyển sang Tab "🏫 Xem Theo Lớp": Cho phép theo dõi bài dạy và nội dung tích hợp (NLS, BVMT, QCN, QPAN, AI...) tập trung vào 1 lớp cụ thể.
+  4. Chuyển sang Tab "📊 Theo Từng Môn": Gom nhóm toàn bộ các tiết dạy trong tuần theo từng môn (môn 1 đến môn 2, 3, 4) kèm cột Lớp rõ ràng.
+  5. Xuất file nộp hoặc in ấn:
+     - Bấm "📄 Xuất Word (.docx)": Xuất file Word chuẩn thể thức Nghị định 30/2020/NĐ-CP (có cột Lớp nổi bật, tiêu đề Tổ Chuyên Môn, chữ ký BGH, Tổ trưởng và Giáo viên bộ môn).
+     - Bấm "📊 Xuất Excel (.xlsx)": Xuất file Excel đầy đủ công thức và định dạng.
+     - Bấm "👁️ Xem trước in A4": Xem trước trực quan và in ngay ra máy in.
+     - Bấm "📦 Xuất / In nhiều tuần": Gộp nhiều tuần (hoặc cả học kỳ/cả năm) thành 1 file Word duy nhất, tự động ngắt trang từng tuần.
+
+----------------------------------------------------------------------------------------
+🌟 ĐẶC ĐIỂM NỔI BẬT & CƠ CHẾ THÔNG MINH CỦA BẢN LBG_BM:
+----------------------------------------------------------------------------------------
+1. Tự Động Theo Dõi Độc Lập Tiến Độ PPCT Của Từng Lớp:
+   - Khi Thầy/Cô dạy môn Tin học ở lớp 4A1 (2 tiết/tuần) và lớp 4A2 (2 tiết/tuần): Cả 2 lớp đều được tính đúng tiến độ tuần 1: tiết 1 và tiết 2 bài dạy của lớp đó, không bị cộng dồn hay lệch số tiết giữa các lớp.
+   - Khi dạy nhiều môn (ví dụ vừa dạy Tin học vừa dạy Công nghệ ở lớp 5A1): Hệ thống tách riêng tiến độ môn Tin học và tiến độ môn Công nghệ một cách chuẩn xác 100%.
+
+2. Quản Lý Phân Hiệu Và Điểm Trường Linh Hoạt:
+   - Mặc định 5 phân hiệu: Trường chính (Điểm A), Phân hiệu 1 (Điểm B), Phân hiệu 2 (Điểm C), Phân hiệu 3 (Điểm D), Phân hiệu 4 (Điểm E).
+   - Mỗi khối có sẵn 15 lớp học (ví dụ Khối 4: 4A1, 4A2, 4A3, 4B1, 4B2, 4B3, 4C1, 4C2, 4C3, 4D1, 4D2, 4D3, 4E1, 4E2, 4E3).
+   - Thầy/Cô có thể đổi tên phân hiệu (như Điểm Thới Thuận, Điểm Tân Thạnh...), thêm lớp mới (như 4A4, 5B4...) hoặc xóa lớp không dùng đến.
+
+3. Sao Lưu & Bảo Vệ Dữ Liệu An Toàn:
+   - Dữ liệu lưu trong bộ nhớ máy (LocalStorage). Không mở phần mềm ở chế độ Ẩn danh (Incognito/Private).
+   - Định kỳ hoặc sau khi xếp TKB xong, hãy vào Tab "⚙️ Cài Đặt & TKB" bấm "💾 Sao lưu toàn bộ dữ liệu LBG_BM ra file JSON" để cất giữ trong máy hoặc USB. Khi cần đổi máy tính, chỉ cần bấm "📤 Khôi phục dữ liệu từ file JSON" là toàn bộ dữ liệu được phục hồi nguyên vẹn.
+
+Chúc Quý Thầy/Cô một năm học mới nhiều sức khỏe, hạnh phúc và thành công!
+========================================================================================

@@ -224,6 +224,9 @@ window.XlsxGenerator = (function() {
         // Pos 4: after period
         pushCustom('4');
 
+        // Lớp (GVBM)
+        cols.push({ key: 'className', title: 'Lớp', isCustom: false, width: 11 });
+
         // Subject
         cols.push({ key: 'subject', title: 'Môn học', isCustom: false, width: isCtlop ? 18 : 20 });
 
@@ -1089,3 +1092,14 @@ ${colsXml}    </cols>
         generateLbgBySubjectXlsx: generateLbgBySubjectXlsx
     };
 })();
+
+// Direct window bindings for convenience and cross-compatibility
+if (typeof window !== 'undefined' && window.XlsxGenerator) {
+    window.generateLbgXlsx = window.XlsxGenerator.generateLbgXlsx;
+    window.generateTimetableXlsx = window.XlsxGenerator.generateTimetableXlsx;
+    window.generateLbgBySubjectXlsx = window.XlsxGenerator.generateLbgBySubjectXlsx;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = (typeof window !== 'undefined' && window.XlsxGenerator) ? window.XlsxGenerator : {};
+}
+

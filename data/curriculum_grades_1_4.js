@@ -36281,8 +36281,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 1,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 1: Sắc màu tự nhiên. Bài 1: Màu sắc em yêu (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36290,8 +36290,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 2,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 1: Màu sắc em yêu (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36299,8 +36299,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 3,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 2: Hoa lá quanh em (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36308,8 +36308,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 4,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 2: Hoa lá quanh em (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36317,8 +36317,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 5,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 2: Vẻ đẹp cuộc sống. Bài 3: Đồ vật quen thuộc (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36326,8 +36326,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 6,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 3: Đồ vật quen thuộc (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36335,8 +36335,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 7,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 4: Trái cây thơm ngon (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36344,8 +36344,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 8,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 4: Trái cây thơm ngon (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36353,7 +36353,7 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 9,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Ôn tập giữa kì 1: Trưng bày sản phẩm",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -36362,8 +36362,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 10,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 3: Ngôi trường của em. Bài 5: Góc học tập (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36371,8 +36371,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 11,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 5: Góc học tập (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36380,8 +36380,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 12,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 6: Bạn bè và thầy cô (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36389,8 +36389,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 13,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 6: Bạn bè và thầy cô (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36398,8 +36398,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 14,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 4: Thế giới cổ tích. Bài 7: Nhân vật cổ tích (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36407,8 +36407,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 15,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 7: Nhân vật cổ tích (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36416,8 +36416,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 16,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 8: Minh họa truyện dân gian (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36425,8 +36425,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 17,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 8: Minh họa truyện dân gian (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36434,8 +36434,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 18,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Đánh giá cuối học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36443,8 +36443,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 19,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 5: Chào đón năm mới. Bài 9: Thiệp chúc mừng xuân (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36452,8 +36452,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 20,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 9: Thiệp chúc mừng xuân (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36461,8 +36461,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 21,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 10: Lễ hội quê hương (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36470,8 +36470,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 22,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 10: Lễ hội quê hương (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36479,8 +36479,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 23,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 6: Động vật đáng yêu. Bài 11: Con vật nuôi trong nhà (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36488,8 +36488,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 24,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 11: Con vật nuôi trong nhà (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36497,8 +36497,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 25,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 12: Động vật hoang dã (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36506,8 +36506,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 26,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 12: Động vật hoang dã (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36515,7 +36515,7 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 27,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đánh giá giữa học kì 2",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -36524,8 +36524,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 28,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 7: Phương tiện giao thông. Bài 13: Xe cộ trên đường (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36533,8 +36533,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 29,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 13: Xe cộ trên đường (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36542,8 +36542,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 30,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 14: Tàu bè trên sông biển (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36551,8 +36551,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 31,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 14: Tàu bè trên sông biển (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36560,8 +36560,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 32,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Chủ đề 8: Mùa hè rực rỡ. Bài 15: Cảnh đẹp thiên nhiên (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36569,8 +36569,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 33,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "1 tiết",
+        "lessonName": "Bài 15: Cảnh đẹp thiên nhiên (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -36578,7 +36578,7 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 34,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 16: Hoạt động ngày hè",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -36587,8 +36587,8 @@ window.APP_GRADE_DATA = {
         "subject": "Mĩ thuật",
         "periodInWeek": 1,
         "ppct": 35,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Đánh giá cuối năm học: Triển lãm mĩ thuật",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36596,8 +36596,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 1,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Phần 1: Công nghệ và đời sống. Bài 1: Tự nhiên và công nghệ (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36605,7 +36605,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 2,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 1: Tự nhiên và công nghệ (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36614,8 +36614,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 3,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 2: Sử dụng đèn học (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36623,7 +36623,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 4,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 2: Sử dụng đèn học (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36632,8 +36632,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 5,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 3: Sử dụng quạt điện (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36641,7 +36641,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 6,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 3: Sử dụng quạt điện (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36650,8 +36650,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 7,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 4: Sử dụng máy thu thanh (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36659,7 +36659,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 8,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 4: Sử dụng máy thu thanh (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36668,8 +36668,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 9,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Ôn tập phần 1: Thiết bị điện gia đình",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36677,8 +36677,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 10,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 5: Sử dụng máy thu hình (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36686,7 +36686,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 11,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 5: Sử dụng máy thu hình (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36695,8 +36695,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 12,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 6: An toàn với môi trường công nghệ trong gia đình (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36704,7 +36704,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 13,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 6: An toàn với môi trường công nghệ trong gia đình (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36713,8 +36713,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 14,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Ôn tập học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36722,8 +36722,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 15,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Đánh giá cuối học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36731,8 +36731,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 16,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Phần 2: Thủ công kĩ thuật. Dự án 1: Đồ dùng học tập của em (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36740,7 +36740,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 17,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Dự án 1: Đồ dùng học tập của em (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36749,8 +36749,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 18,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Tổng kết học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36758,8 +36758,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 19,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 7: Dụng cụ và vật liệu làm thủ công (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36767,7 +36767,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 20,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 7: Dụng cụ và vật liệu làm thủ công (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36776,8 +36776,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 21,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 8: Làm đồ dùng học tập: Thước kẻ (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36785,7 +36785,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 22,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 8: Làm đồ dùng học tập: Thước kẻ (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36794,8 +36794,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 23,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 8: Làm đồ dùng học tập: Ống đựng bút (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36803,7 +36803,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 24,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 8: Làm đồ dùng học tập: Ống đựng bút (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36812,8 +36812,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 25,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 9: Làm biển báo giao thông (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36821,7 +36821,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 26,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 9: Làm biển báo giao thông (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36830,8 +36830,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 27,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Đánh giá giữa học kì 2",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36839,8 +36839,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 28,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 10: Làm đồ chơi: Máy bay giấy (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36848,7 +36848,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 29,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 10: Làm đồ chơi: Máy bay giấy (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36857,8 +36857,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 30,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 10: Làm đồ chơi: Chong chóng quay (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36866,7 +36866,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 31,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 10: Làm đồ chơi: Chong chóng quay (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36875,8 +36875,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 32,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Dự án 2: Ngày hội STEM - Đồ chơi tuổi thơ (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -36884,7 +36884,7 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 33,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Dự án 2: Ngày hội STEM - Đồ chơi tuổi thơ (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36893,8 +36893,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 34,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Ôn tập cuối học kì 2",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36902,8 +36902,8 @@ window.APP_GRADE_DATA = {
         "subject": "Công nghệ",
         "periodInWeek": 1,
         "ppct": 35,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Đánh giá cuối năm học",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36911,7 +36911,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 1,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 1: Máy tính và em. Bài 1: Thông tin và quyết định (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -36920,7 +36920,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 2,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 1: Thông tin và quyết định (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36929,7 +36929,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 3,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 2: Xử lí thông tin (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -36938,7 +36938,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 4,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 2: Xử lí thông tin (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36947,7 +36947,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 5,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 3: Máy tính - Những người bạn mới (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -36956,7 +36956,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 6,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 3: Máy tính - Những người bạn mới (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36965,7 +36965,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 7,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 4: Làm việc với máy tính (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -36974,7 +36974,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 8,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 4: Làm việc với máy tính (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -36983,8 +36983,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 9,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Ôn tập và kiểm tra giữa học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -36992,8 +36992,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 10,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 5: Sử dụng bàn phím (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37001,8 +37001,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 11,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 5: Sử dụng bàn phím (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37010,8 +37010,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 12,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Chủ đề 2: Mạng máy tính và Internet. Bài 6: Khám phá thông tin trên Internet (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37019,8 +37019,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 13,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 6: Khám phá thông tin trên Internet (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37028,8 +37028,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 14,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 7: Sắp xếp để dễ tìm (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37037,8 +37037,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 15,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 7: Sắp xếp để dễ tìm (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37046,8 +37046,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 16,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 8: Sơ đồ hình cây. Tổ chức thông tin trong máy tính (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37055,8 +37055,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 17,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 8: Sơ đồ hình cây. Tổ chức thông tin trong máy tính (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37064,8 +37064,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 18,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Ôn tập và kiểm tra cuối học kì 1",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -37073,7 +37073,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 19,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 3: Tổ chức lưu trữ, tìm kiếm thông tin. Bài 9: Thực hành tệp và thư mục (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37082,7 +37082,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 20,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 9: Thực hành tệp và thư mục (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -37091,7 +37091,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 21,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 4: Đạo đức trong môi trường số. Bài 10: Bảo vệ thông tin khi dùng máy tính (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37100,7 +37100,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 22,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 10: Bảo vệ thông tin khi dùng máy tính (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -37109,7 +37109,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 23,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 5: Ứng dụng tin học. Bài 11: Bài trình chiếu của em (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37118,7 +37118,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 24,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 11: Bài trình chiếu của em (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -37127,7 +37127,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 25,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 12: Tìm hiểu thế giới tự nhiên (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37136,7 +37136,7 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 26,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài 12: Tìm hiểu thế giới tự nhiên (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -37145,8 +37145,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 27,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Ôn tập và kiểm tra giữa học kì 2",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -37154,8 +37154,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 28,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Chủ đề 6: Giải quyết vấn đề với sự trợ giúp của máy tính. Bài 13: Thuật toán (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37163,8 +37163,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 29,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 13: Thuật toán (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37172,8 +37172,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 30,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 14: Thực hiện theo thuật toán (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37181,8 +37181,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 31,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 14: Thực hiện theo thuật toán (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37190,8 +37190,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 32,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Bài 15: Nhiệm vụ của em và máy tính (Tiết 1)",
+        "duration": "2 tiết",
         "integration": ""
       },
       {
@@ -37199,8 +37199,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 33,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Bài 15: Nhiệm vụ của em và máy tính (Tiết 2)",
+        "duration": "",
         "integration": ""
       },
       {
@@ -37208,8 +37208,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 34,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "",
+        "lessonName": "Ôn tập cuối học kì 2",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -37217,8 +37217,8 @@ window.APP_GRADE_DATA = {
         "subject": "Tin học",
         "periodInWeek": 1,
         "ppct": 35,
-        "lessonName": "GV bộ môn dạy",
-        "duration": "2 tiết",
+        "lessonName": "Kiểm tra, đánh giá cuối năm học",
+        "duration": "1 tiết",
         "integration": ""
       },
       {
@@ -37226,7 +37226,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 1,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 1)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37235,7 +37235,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 2,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 2)",
         "duration": "",
         "integration": ""
       },
@@ -37244,7 +37244,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 3,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 3)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37253,7 +37253,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 4,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 4)",
         "duration": "",
         "integration": ""
       },
@@ -37262,7 +37262,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 5,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 5)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37271,7 +37271,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 6,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 6)",
         "duration": "",
         "integration": ""
       },
@@ -37280,7 +37280,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 7,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 7)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37289,7 +37289,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 8,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 8)",
         "duration": "",
         "integration": ""
       },
@@ -37298,7 +37298,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 9,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 9)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37307,7 +37307,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 10,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 10)",
         "duration": "",
         "integration": ""
       },
@@ -37316,7 +37316,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 11,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 11)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37325,7 +37325,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 12,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 12)",
         "duration": "",
         "integration": ""
       },
@@ -37334,7 +37334,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 13,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 13)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37343,7 +37343,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 14,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 14)",
         "duration": "",
         "integration": ""
       },
@@ -37352,7 +37352,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 15,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Biến đổi đội hình (Tiết 15)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37361,7 +37361,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 16,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đội hình đội ngũ: Trò chơi rèn luyện phản xạ (Tiết 16)",
         "duration": "",
         "integration": ""
       },
@@ -37370,7 +37370,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 17,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 17)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37379,7 +37379,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 18,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 18)",
         "duration": "",
         "integration": ""
       },
@@ -37388,7 +37388,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 19,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 19)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37397,7 +37397,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 20,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 20)",
         "duration": "",
         "integration": ""
       },
@@ -37406,7 +37406,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 21,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 21)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37415,7 +37415,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 22,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 22)",
         "duration": "",
         "integration": ""
       },
@@ -37424,7 +37424,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 23,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 23)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37433,7 +37433,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 24,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 24)",
         "duration": "",
         "integration": ""
       },
@@ -37442,7 +37442,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 25,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 25)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37451,7 +37451,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 26,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 26)",
         "duration": "",
         "integration": ""
       },
@@ -37460,7 +37460,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 27,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 27)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37469,7 +37469,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 28,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 28)",
         "duration": "",
         "integration": ""
       },
@@ -37478,7 +37478,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 29,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 29)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37487,7 +37487,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 30,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 30)",
         "duration": "",
         "integration": ""
       },
@@ -37496,7 +37496,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 31,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 31)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37505,7 +37505,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 32,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 32)",
         "duration": "",
         "integration": ""
       },
@@ -37514,7 +37514,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 33,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục phát triển chung (Tiết 33)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37523,7 +37523,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 34,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Bài tập thể dục: Trò chơi vận động (Tiết 34)",
         "duration": "",
         "integration": ""
       },
@@ -37532,7 +37532,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 35,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đánh giá thể lực học kì 1 (Tiết 35)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37541,7 +37541,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 36,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Kiểm tra cuối học kì 1 (Tiết 36)",
         "duration": "",
         "integration": ""
       },
@@ -37550,7 +37550,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 37,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 37)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37559,7 +37559,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 38,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 38)",
         "duration": "",
         "integration": ""
       },
@@ -37568,7 +37568,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 39,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 39)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37577,7 +37577,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 40,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 40)",
         "duration": "",
         "integration": ""
       },
@@ -37586,7 +37586,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 41,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 41)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37595,7 +37595,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 42,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 42)",
         "duration": "",
         "integration": ""
       },
@@ -37604,7 +37604,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 43,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 43)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37613,7 +37613,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 44,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 44)",
         "duration": "",
         "integration": ""
       },
@@ -37622,7 +37622,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 45,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 45)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37631,7 +37631,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 46,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 46)",
         "duration": "",
         "integration": ""
       },
@@ -37640,7 +37640,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 47,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 47)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37649,7 +37649,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 48,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 48)",
         "duration": "",
         "integration": ""
       },
@@ -37658,7 +37658,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 49,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 49)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37667,7 +37667,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 50,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 50)",
         "duration": "",
         "integration": ""
       },
@@ -37676,7 +37676,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 51,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tư thế và kĩ năng vận động cơ bản (Tiết 51)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37685,7 +37685,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 52,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận động cơ bản: Rèn luyện thăng bằng (Tiết 52)",
         "duration": "",
         "integration": ""
       },
@@ -37694,7 +37694,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 53,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 53)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37703,7 +37703,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 54,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 54)",
         "duration": "",
         "integration": ""
       },
@@ -37712,7 +37712,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 55,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 55)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37721,7 +37721,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 56,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 56)",
         "duration": "",
         "integration": ""
       },
@@ -37730,7 +37730,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 57,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 57)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37739,7 +37739,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 58,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 58)",
         "duration": "",
         "integration": ""
       },
@@ -37748,7 +37748,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 59,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 59)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37757,7 +37757,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 60,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 60)",
         "duration": "",
         "integration": ""
       },
@@ -37766,7 +37766,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 61,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 61)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37775,7 +37775,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 62,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 62)",
         "duration": "",
         "integration": ""
       },
@@ -37784,7 +37784,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 63,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 63)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37793,7 +37793,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 64,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 64)",
         "duration": "",
         "integration": ""
       },
@@ -37802,7 +37802,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 65,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 65)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37811,7 +37811,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 66,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 66)",
         "duration": "",
         "integration": ""
       },
@@ -37820,7 +37820,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 67,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Môn thể thao tự chọn (Tiết 67)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37829,7 +37829,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 68,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Thể thao tự chọn: Phối hợp đồng đội (Tiết 68)",
         "duration": "",
         "integration": ""
       },
@@ -37838,7 +37838,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 1,
         "ppct": 69,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Kiểm tra, đánh giá thể lực cuối năm (Tiết 69)",
         "duration": "2 tiết",
         "integration": ""
       },
@@ -37847,7 +37847,7 @@ window.APP_GRADE_DATA = {
         "subject": "GD Thể chất",
         "periodInWeek": 2,
         "ppct": 70,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Tổng kết môn học GD Thể chất (Tiết 70)",
         "duration": "",
         "integration": ""
       },
@@ -37856,7 +37856,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 1,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 1: Chào năm học mới. Hát: Bài ca đi học (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37865,7 +37865,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 2,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Bài ca đi học (Tiết 2). Nhạc cụ gõ đệm",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37874,7 +37874,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 3,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 1. Nghe nhạc: Khúc ca mùa thu",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37883,7 +37883,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 4,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 1",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37892,7 +37892,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 5,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 2: Mặt trời quê em. Hát: Đếm sao (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37901,7 +37901,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 6,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Đếm sao (Tiết 2). Nhạc cụ",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37910,7 +37910,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 7,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 2. Thường thức âm nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37919,7 +37919,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 8,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 2",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37928,7 +37928,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 9,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 3: Mái trường thân yêu. Hát: Em yêu trường em (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37937,7 +37937,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 10,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Em yêu trường em (Tiết 2). Gõ đệm",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37946,7 +37946,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 11,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 3. Nghe nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37955,7 +37955,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 12,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 3",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37964,7 +37964,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 13,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 4: Ước mơ tuổi thơ. Hát: Khúc ca bốn mùa (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37973,7 +37973,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 14,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Khúc ca bốn mùa (Tiết 2). Nhạc cụ",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37982,7 +37982,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 15,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 4. Thường thức âm nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -37991,7 +37991,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 16,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 4",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38000,7 +38000,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 17,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Ôn tập học kì 1",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38009,7 +38009,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 18,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đánh giá cuối học kì 1",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38018,7 +38018,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 19,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 5: Khúc ca ngày xuân. Hát: Mùa xuân ơi (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38027,7 +38027,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 20,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Mùa xuân ơi (Tiết 2). Nhạc cụ gõ",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38036,7 +38036,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 21,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 5. Nghe nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38045,7 +38045,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 22,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 5",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38054,7 +38054,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 23,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 6: Cánh én tuổi thơ. Hát: Bay cao tiếng hát ước mơ (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38063,7 +38063,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 24,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Bay cao tiếng hát ước mơ (Tiết 2)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38072,7 +38072,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 25,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 6. Thường thức âm nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38081,7 +38081,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 26,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 6",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38090,7 +38090,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 27,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đánh giá giữa học kì 2",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38099,7 +38099,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 28,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 7: Gia đình yêu thương. Hát: Ba ngọn nến lung linh (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38108,7 +38108,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 29,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Ba ngọn nến lung linh (Tiết 2). Gõ đệm",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38117,7 +38117,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 30,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đọc nhạc: Bài số 7. Nghe nhạc",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38126,7 +38126,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 31,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Vận dụng - Sáng tạo Chủ đề 7",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38135,7 +38135,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 32,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Chủ đề 8: Mùa hè vui. Hát: Mùa hè của em (Tiết 1)",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38144,7 +38144,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 33,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Hát: Mùa hè của em (Tiết 2). Vận động cơ thể",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38153,7 +38153,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 34,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Ôn tập cuối năm học",
         "duration": "1 tiết",
         "integration": ""
       },
@@ -38162,7 +38162,7 @@ window.APP_GRADE_DATA = {
         "subject": "Âm nhạc",
         "periodInWeek": 1,
         "ppct": 35,
-        "lessonName": "GV bộ môn dạy",
+        "lessonName": "Đánh giá cuối năm học",
         "duration": "1 tiết",
         "integration": ""
       },

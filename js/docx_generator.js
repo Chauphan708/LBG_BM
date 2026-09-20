@@ -168,7 +168,42 @@ window.DocxGenerator = (function() {
      * @param {Object} options { settings, subjectsData: [{ subjectName, rows: [...] }], isMultiSubject: boolean }
      */
     function generateKhdhDocx(options) {
-        const { settings, subjectsData, isMultiSubject } = options;
+        const settings = Object.assign({}, options.settings || {});
+        let subjectsData = options.subjectsData;
+        let isMultiSubject = !!options.isMultiSubject;
+
+        if (!subjectsData && options.rows) {
+            const subName = options.subject || 'Môn học';
+            subjectsData = [{
+                subjectName: subName,
+                rows: options.rows.map(r => ({
+                    ...r,
+                    lesson: r.lesson || r.lessonName || '',
+                    topic: r.topic || r.theme || ''
+                }))
+            }];
+            isMultiSubject = false;
+        } else if (Array.isArray(subjectsData)) {
+            subjectsData = subjectsData.map(sub => ({
+                ...sub,
+                rows: (sub.rows || []).map(r => ({
+                    ...r,
+                    lesson: r.lesson || r.lessonName || '',
+                    topic: r.topic || r.theme || ''
+                }))
+            }));
+        } else {
+            subjectsData = [{
+                subjectName: options.subject || 'Môn học',
+                rows: []
+            }];
+            isMultiSubject = false;
+        }
+
+        if (options.grade && !settings.grade) {
+            settings.grade = `Khối ${options.grade}`;
+        }
+
         const zip = new JSZip();
 
         zip.file("[Content_Types].xml", createContentTypes());
@@ -232,9 +267,10 @@ window.DocxGenerator = (function() {
         </w:tbl>`;
 
         // 2. Tiêu đề chung & Căn cứ pháp lý
+        const firstSubName = (subjectsData[0] && subjectsData[0].subjectName) ? subjectsData[0].subjectName : (options.subject || 'BỘ MÔN');
         const mainTitle = isMultiSubject
             ? `KẾ HOẠCH DẠY HỌC CÁC MÔN HỌC ${escapeXml((settings.grade || 'KHỐI 5').toUpperCase())}`
-            : `KẾ HOẠCH DẠY HỌC MÔN ${escapeXml(subjectsData[0].subjectName.toUpperCase())} ${escapeXml((settings.grade || 'KHỐI 5').toUpperCase())}`;
+            : `KẾ HOẠCH DẠY HỌC MÔN ${escapeXml(firstSubName.toUpperCase())} ${escapeXml((settings.grade || 'KHỐI 5').toUpperCase())}`;
 
         docBody += `
         <w:p>
@@ -267,7 +303,7 @@ window.DocxGenerator = (function() {
         docBody += `
         <w:p>
             <w:pPr><w:jc w:val="both"/><w:spacing w:after="200" w:line="260"/><w:ind w:firstLine="360"/></w:pPr>
-            <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Tổ chuyên môn ${escapeXml(settings.grade || 'Khối 5')} xây dựng Kế hoạch dạy học chi tiết ${isMultiSubject ? 'các môn học' : 'môn ' + escapeXml(subjectsData[0].subjectName)} như sau:</w:t></w:r>
+            <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Tổ chuyên môn ${escapeXml(settings.grade || 'Khối 5')} xây dựng Kế hoạch dạy học chi tiết ${isMultiSubject ? 'các môn học' : 'môn ' + escapeXml(firstSubName)} như sau:</w:t></w:r>
         </w:p>`;
 
         // Helper to determine subject category
@@ -761,6 +797,9 @@ window.DocxGenerator = (function() {
         // Pos 4: after period
         pushCustom('4');
 
+        // Lớp (GVBM)
+        cols.push({ key: 'className', title: 'Lớp', isCustom: false });
+
         // Subject
         cols.push({ key: 'subject', title: 'Môn học', isCustom: false });
 
@@ -808,7 +847,8 @@ window.DocxGenerator = (function() {
                         if (col.key === 'day') col.width = 1300;
                         else if (col.key === 'session') col.width = 850;
                         else if (col.key === 'period') col.width = 600;
-                        else if (col.key === 'subject') col.width = 2400;
+                        else if (col.key === 'className') col.width = 1000;
+                        else if (col.key === 'subject') col.width = 2000;
                         else if (col.key === 'ppct') col.width = 1000;
                         else if (col.key === 'lesson') col.width = 4100;
                         else if (col.key === 'integ') col.width = 4320;
@@ -839,6 +879,7 @@ window.DocxGenerator = (function() {
                         if (col.key === 'day') col.width = wBase.day;
                         else if (col.key === 'session') col.width = wBase.session;
                         else if (col.key === 'period') col.width = wBase.period;
+                        else if (col.key === 'className') col.width = 1000;
                         else if (col.key === 'subject') col.width = wBase.subject;
                         else if (col.key === 'ppct') col.width = wBase.ppct;
                         else if (col.key === 'lesson') col.width = wLesson;
@@ -888,7 +929,8 @@ window.DocxGenerator = (function() {
                         if (col.key === 'day') col.width = 1050;
                         else if (col.key === 'session') col.width = 700;
                         else if (col.key === 'period') col.width = 500;
-                        else if (col.key === 'subject') col.width = 1600;
+                        else if (col.key === 'className') col.width = 800;
+                        else if (col.key === 'subject') col.width = 1400;
                         else if (col.key === 'ppct') col.width = 750;
                         else if (col.key === 'lesson') col.width = 2550;
                         else if (col.key === 'integ') col.width = 2450;
@@ -1011,7 +1053,7 @@ window.DocxGenerator = (function() {
                     </w:p>
                     <w:p>
                         <w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="40"/></w:pPr>
-                        <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${escapeXml((settings.grade || 'KHỐI 5').toUpperCase())} - ${escapeXml((settings.className || 'LỚP 5A').toUpperCase())}</w:t></w:r>
+                        <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${escapeXml((settings.departmentName || 'TỔ BỘ MÔN').toUpperCase())}</w:t></w:r>
                     </w:p>
                 </w:tc>
                 <w:tc>
@@ -1030,11 +1072,15 @@ window.DocxGenerator = (function() {
 
         <w:p>
             <w:pPr><w:jc w:val="center"/><w:spacing w:before="240" w:after="40"/></w:pPr>
-            <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${isCtlop ? 'LỊCH BÁO GIẢNG TÍCH HỢP' : 'LỊCH BÁO GIẢNG'} TUẦN ${weekNum}</w:t></w:r>
+            <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr><w:t>${isCtlop ? 'LỊCH BÁO GIẢNG TÍCH HỢP' : 'LỊCH BÁO GIẢNG GIÁO VIÊN BỘ MÔN'} TUẦN ${weekNum}</w:t></w:r>
         </w:p>
         <w:p>
             <w:pPr><w:jc w:val="center"/><w:spacing w:after="200"/></w:pPr>
             <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>(Thời gian thực hiện: Từ ngày ${escapeXml(weekInfo.startDateVN || '')} đến ngày ${escapeXml(weekInfo.endDateVN || '')})</w:t></w:r>
+        </w:p>
+        <w:p>
+            <w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr>
+            <w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>Giáo viên giảng dạy: ${escapeXml(settings.teacherName || '')}</w:t></w:r>
         </w:p>
         `;
 
@@ -1131,6 +1177,12 @@ window.DocxGenerator = (function() {
                         <w:tc>
                             <w:tcPr><w:tcW w:w="${col.width}" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
                             <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${slot.period}</w:t></w:r></w:p>
+                        </w:tc>`;
+                    } else if (col.key === 'className') {
+                        rowCellsXml += `
+                        <w:tc>
+                            <w:tcPr><w:tcW w:w="${col.width}" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
+                            <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${escapeXml(slot.className || '')}</w:t></w:r></w:p>
                         </w:tc>`;
                     } else if (col.key === 'subject') {
                         rowCellsXml += `
@@ -1762,7 +1814,7 @@ window.DocxGenerator = (function() {
                 </w:tc>
                 <w:tc>
                     <w:tcPr><w:tcW w:w="4900" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>
-                    <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>GIÁO VIÊN CHỦ NHIỆM</w:t></w:r></w:p>
+                    <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>GIÁO VIÊN BỘ MÔN</w:t></w:r></w:p>
                     <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="600"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>(Ký và ghi rõ họ tên)</w:t></w:r></w:p>
                     <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:line="220" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr><w:t>${escapeXml(settings.homeroomTeacher || 'Nguyễn Thị Thu Hà')}</w:t></w:r></w:p>
                 </w:tc>
@@ -2331,3 +2383,17 @@ window.DocxGenerator = (function() {
         generateBatchLbgBySubjectDocx: generateBatchLbgBySubjectDocx
     };
 })();
+
+// Direct window bindings for convenience and cross-compatibility
+if (typeof window !== 'undefined' && window.DocxGenerator) {
+    window.generateKhdhDocx = window.DocxGenerator.generateKhdhDocx;
+    window.generateLbgDocx = window.DocxGenerator.generateLbgDocx;
+    window.generateMultiWeekLbgDocx = window.DocxGenerator.generateMultiWeekLbgDocx;
+    window.generateTimetableDocx = window.DocxGenerator.generateTimetableDocx;
+    window.generateLbgBySubjectDocx = window.DocxGenerator.generateLbgBySubjectDocx;
+    window.generateBatchLbgBySubjectDocx = window.DocxGenerator.generateBatchLbgBySubjectDocx;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = (typeof window !== 'undefined' && window.DocxGenerator) ? window.DocxGenerator : {};
+}
+

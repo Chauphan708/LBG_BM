@@ -1628,3 +1628,132 @@ body {
     background: #eff6ff;
     box-shadow: 0 0 0 1px var(--primary);
 }
+
+/* ==========================================================================
+   GVBM (GIÁO VIÊN BỘ MÔN) SPECIFIC STYLING
+   ========================================================================== */
+
+/* Campus Badges & Theme Colors */
+.badge-campus-A {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    display: inline-block;
+}
+.badge-campus-B {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    display: inline-block;
+}
+.badge-campus-C {
+    background: #faf5ff;
+    color: #7e22ce;
+    border: 1px solid #e9d5ff;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    display: inline-block;
+}
+.badge-campus-D {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    display: inline-block;
+}
+.badge-campus-E {
+    background: #f0fdfa;
+    color: #0f766e;
+    border: 1px solid #99f6e4;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    display: inline-block;
+}
+
+/* Class Pills in Settings */
+.class-pill-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.84rem;
+    transition: all 0.15s ease;
+}
+.class-pill-item:hover {
+    border-color: var(--primary);
+    background: #f1f5f9;
+}
+.class-pill-item.assigned {
+    background: #eff6ff;
+    border-color: #3b82f6;
+}
+
+/* Assigned Subject Pills */
+.assigned-subject-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ffffff;
+    border: 1.5px solid #2563eb;
+    color: #1e40af;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.86rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Master Timetable Matrix Cell */
+.matrix-slot-bm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.2rem;
+    min-height: 46px;
+    border-radius: 4px;
+}
+.matrix-slot-bm .slot-class-badge {
+    font-weight: 800;
+    font-size: 0.88rem;
+    line-height: 1.2;
+}
+.matrix-slot-bm .slot-subject-name {
+    font-size: 0.78rem;
+    color: #334155;
+    font-weight: 600;
+    line-height: 1.2;
+}
+.matrix-slot-bm.slot-empty {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.78rem;
+}
+
+/* Filter buttons */
+.filter-class-grade-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    font-weight: 700;
+}
+
