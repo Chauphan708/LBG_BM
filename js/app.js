@@ -313,6 +313,76 @@
         return weeks;
     }
 
+    function getCustomSubjectCurricula() {
+        const custom = {};
+        let hasCustom = false;
+        for (let g = 1; g <= 5; g++) {
+            const baseList = g === 5 
+                ? (window.APP_INITIAL_DATA && Array.isArray(window.APP_INITIAL_DATA.ppct) ? window.APP_INITIAL_DATA.ppct : []) 
+                : (window.APP_GRADE_DATA && window.APP_GRADE_DATA[g] && Array.isArray(window.APP_GRADE_DATA[g].ppct) ? window.APP_GRADE_DATA[g].ppct : []);
+            const currList = state.gradeCurricula[g] || [];
+            
+            // Unique subjects present in this grade
+            const subjects = [...new Set(currList.map(x => x.subject))];
+            subjects.forEach(sub => {
+                const curSubLessons = currList.filter(x => x.subject === sub);
+                const baseSubLessons = baseList.filter(x => x.subject === sub);
+
+                let isMod = false;
+                if (curSubLessons.length !== baseSubLessons.length) {
+                    isMod = true;
+                } else {
+                    for (let i = 0; i < curSubLessons.length; i++) {
+                        const c = curSubLessons[i];
+                        const b = baseSubLessons[i];
+                        if (!b || c.ppct !== b.ppct || c.lessonName !== b.lessonName || c.integration !== b.integration || c.duration !== b.duration || c.week !== b.week) {
+                            isMod = true;
+                            break;
+                        }
+                    }
+                }
+                if (isMod) {
+                    custom[`${g}_${sub}`] = curSubLessons;
+                    hasCustom = true;
+                }
+            });
+        }
+        return hasCustom ? custom : null;
+    }
+
+    function applyCustomSubjectCurricula(customMap) {
+        if (!customMap || typeof customMap !== 'object') return;
+        Object.keys(customMap).forEach(key => {
+            const underscoreIdx = key.indexOf('_');
+            if (underscoreIdx === -1) return;
+            const grade = parseInt(key.slice(0, underscoreIdx), 10);
+            const subject = key.slice(underscoreIdx + 1);
+            const customLessons = customMap[key];
+            if (Array.isArray(customLessons) && state.gradeCurricula[grade]) {
+                const remaining = state.gradeCurricula[grade].filter(x => x.subject !== subject);
+                state.gradeCurricula[grade] = remaining.concat(customLessons);
+                state.gradeCurricula[grade].sort((a, b) => (a.week || 0) - (b.week || 0) || (a.ppct || 0) - (b.ppct || 0));
+            }
+        });
+    }
+
+    function cleanupObsoleteStorage() {
+        const obsoleteKeys = [
+            "LBG_APP_DATA_V4",
+            "LBG_APP_DATA_V5",
+            "LBG_APP_DATA_V6",
+            "LBG_APP_DATA_V7"
+        ];
+        obsoleteKeys.forEach(k => {
+            try {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem(k)) {
+                    localStorage.removeItem(k);
+                    console.log("Cleaned obsolete storage key:", k);
+                }
+            } catch (e) {}
+        });
+    }
+
     function loadState() {
         initGradeCurricula();
 
@@ -320,7 +390,9 @@
         state.weeks = autoGenerateCalendar("2026 - 2027", "2026-09-07", "2027-02-08", "2027-02-21");
 
         try {
-            const raw = localStorage.getItem(STORAGE_KEY);
+            cleanupObsoleteStorage();
+            const raw = (typeof localStorage !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null) || 
+                        (typeof sessionStorage !== 'undefined' ? sessionStorage.getItem(STORAGE_KEY) : null);
             if (raw) {
                 const saved = JSON.parse(raw);
                 if (saved.settings) Object.assign(state.settings, saved.settings);
@@ -329,7 +401,10 @@
                 if (Array.isArray(saved.allClasses) && saved.allClasses.length > 0) state.allClasses = saved.allClasses;
                 if (Array.isArray(saved.timetable) && saved.timetable.length > 0) state.timetable = saved.timetable;
                 if (Array.isArray(saved.weeks) && saved.weeks.length > 0) state.weeks = saved.weeks;
-                if (saved.gradeCurricula) {
+                
+                if (saved.customSubjectCurricula) {
+                    applyCustomSubjectCurricula(saved.customSubjectCurricula);
+                } else if (saved.gradeCurricula) {
                     for (let g = 1; g <= 5; g++) {
                         if (Array.isArray(saved.gradeCurricula[g]) && saved.gradeCurricula[g].length > 0) {
                             state.gradeCurricula[g] = saved.gradeCurricula[g];
@@ -350,25 +425,45 @@
     loadState();
 
     function saveState() {
+        let toSave = null;
         try {
-            const toSave = {
+            const customSubCurricula = getCustomSubjectCurricula();
+            toSave = {
                 settings: state.settings,
                 assignedSubjects: state.assignedSubjects,
                 campuses: state.campuses,
                 allClasses: state.allClasses,
                 timetable: state.timetable,
                 weeks: state.weeks,
-                gradeCurricula: state.gradeCurricula,
+                customSubjectCurricula: customSubCurricula,
                 currentWeek: state.currentWeek,
                 lbgShowColSign: state.lbgShowColSign,
                 lbgShowColNote: state.lbgShowColNote,
                 lbgCustomCols: state.lbgCustomCols
             };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+
+            const payloadStr = JSON.stringify(toSave);
+
+            try {
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem(STORAGE_KEY, payloadStr);
+                }
+            } catch (quotaErr) {
+                console.warn("Storage quota warning, cleaning obsolete keys...", quotaErr);
+                cleanupObsoleteStorage();
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem(STORAGE_KEY, payloadStr);
+                }
+            }
             updateTopHeader();
         } catch (e) {
             console.error("Error saving LBG_BM state to localStorage:", e);
-            showToast("Lỗi khi lưu dữ liệu cục bộ!", "error");
+            try {
+                if (toSave && typeof sessionStorage !== 'undefined') {
+                    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+                }
+            } catch (sessErr) {}
+            showToast("Bộ nhớ trình duyệt đầy! Dữ liệu đã lưu tạm vào phiên hiện tại. Vui lòng vào Cài Đặt bấm 'Sao lưu JSON'.", "warning");
         }
     }
 
@@ -2359,7 +2454,11 @@
                         if (Array.isArray(parsed.allClasses)) state.allClasses = parsed.allClasses;
                         if (Array.isArray(parsed.timetable)) state.timetable = parsed.timetable;
                         if (Array.isArray(parsed.weeks)) state.weeks = parsed.weeks;
-                        if (parsed.gradeCurricula) state.gradeCurricula = parsed.gradeCurricula;
+                        if (parsed.customSubjectCurricula) {
+                            applyCustomSubjectCurricula(parsed.customSubjectCurricula);
+                        } else if (parsed.gradeCurricula) {
+                            state.gradeCurricula = parsed.gradeCurricula;
+                        }
 
                         saveState();
                         initApp();
@@ -2494,6 +2593,10 @@
 
     // Expose needed globals
     window.state = state;
+    window.saveState = saveState;
+    window.loadState = loadState;
+    window.initGradeCurricula = initGradeCurricula;
+    window.cleanupObsoleteStorage = cleanupObsoleteStorage;
     window.calculateWeekScheduleForBm = calculateWeekScheduleForBm;
     window.calculateWeekScheduleBySubjectForBm = calculateWeekScheduleBySubjectForBm;
     window.renderTabLbg = renderTabLbg;
